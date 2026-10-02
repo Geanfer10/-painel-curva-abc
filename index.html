@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ampliação Estrutural DMP/DPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabeçalho executivo → seletor de projeto → KPIs → Pareto + resumo por classe → tabela detalhada → pendências */
+:root{
+  --bg:#f4f6f3; --surface:#ffffff; --surface-2:#eaefe8; --line:#d5ddd2;
+  --fg:#16211a; --muted:#5b6b60;
+  --brand:#1d6b3c; --brand-ink:#ffffff;
+  --cls-a:#1d6b3c; --cls-b:#c7861a; --cls-c:#7a8a96; --cls-n:#b9c2bb;
+  --curve:#16211a; --warn-bg:#fbf1dc; --warn-fg:#7a4f05;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1611; --surface:#17211a; --surface-2:#1e2b22; --line:#2c3b31;
+  --fg:#e6ede7; --muted:#9aaa9f; --brand:#3fa866; --brand-ink:#08130c;
+  --cls-a:#47b670; --cls-b:#e0a43c; --cls-c:#8d9ca8; --cls-n:#3a4a40;
+  --curve:#e6ede7; --warn-bg:#33270f; --warn-fg:#f0c672; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1611; --surface:#17211a; --surface-2:#1e2b22; --line:#2c3b31;
+  --fg:#e6ede7; --muted:#9aaa9f; --brand:#3fa866; --brand-ink:#08130c;
+  --cls-a:#47b670; --cls-b:#e0a43c; --cls-c:#8d9ca8; --cls-n:#3a4a40;
+  --curve:#e6ede7; --warn-bg:#33270f; --warn-fg:#f0c672; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 56px;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;margin:0;text-wrap:balance}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+header.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid var(--brand);padding-bottom:14px}
+header.top h1{font-size:clamp(28px,4.4vw,42px);line-height:1.05}
+header.top p{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.rule{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:12px;padding:4px 9px;border-radius:3px;color:#fff;font-weight:500}
+.chip.a{background:var(--cls-a)} .chip.b{background:var(--cls-b)} .chip.c{background:var(--cls-c)}
+:root[data-theme="dark"] .chip, :root:not([data-theme="light"]) .chip{color:#fff}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:3px;gap:3px}
+.seg button{font:600 15px var(--f-body);border:0;background:transparent;color:var(--muted);padding:8px 16px;border-radius:4px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+.seg button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.seg.small button{font-size:13px;padding:6px 12px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.kpi .v{font-family:var(--f-display);font-size:30px;font-weight:600;line-height:1.1}
+.kpi .s{font-size:13px;color:var(--muted)}
+.kpi.warn{background:var(--warn-bg);border-color:transparent}
+.kpi.warn .v,.kpi.warn .eyebrow,.kpi.warn .s{color:var(--warn-fg)}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.classes{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px!important}
+.cls{border-bottom:0!important;padding:0!important}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel-h{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:baseline}
+.panel h2{font-size:22px}
+.chart-box{overflow-x:auto}
+svg text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+svg text.ax{font-size:11px}
+svg text.ax.cut{fill:var(--fg);font-weight:500}
+svg text.zone{font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:.04em}
+svg text.dl{font-size:11.5px;font-weight:500;fill:var(--fg)}
+svg text.dv{font-size:11.5px;fill:#fff;opacity:.9}
+svg text.dl.in{fill:#fff}
+svg text.cl{font-size:10.5px;font-weight:500;fill:var(--fg);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+svg text.xl{font-family:var(--f-body);font-size:11.5px;fill:var(--fg)}
+svg text.n{font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block}
+
+.classes{display:flex;flex-direction:column;gap:10px}
+.cls{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.cls:last-child{border-bottom:0}
+.cls .letter{font-family:var(--f-display);font-size:30px;font-weight:700;width:46px;height:46px;display:grid;place-items:center;border-radius:4px;color:#fff}
+.cls .bar{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;margin-top:6px}
+.cls .bar i{display:block;height:100%}
+.cls .t{font-weight:600}
+.cls .m{font-size:13px;color:var(--muted)}
+.cls .val{text-align:right;font-family:var(--f-mono);font-size:14px}
+.cls .val small{display:block;color:var(--muted);font-size:12px}
+
+.insight{background:var(--surface-2);border-radius:6px;padding:12px 14px;font-size:14px}
+.insight b{font-weight:600}
+
+.table-box{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--muted);background:var(--surface-2);padding:9px 10px;position:sticky;top:0}
+td{padding:9px 10px;border-top:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.badge{display:inline-block;min-width:24px;text-align:center;font:600 12px var(--f-mono);padding:2px 6px;border-radius:3px;color:#fff}
+.badge.A{background:var(--cls-a)} .badge.B{background:var(--cls-b)} .badge.C{background:var(--cls-c)}
+.badge.N{background:transparent;color:var(--muted);border:1px dashed var(--muted)}
+.sub{display:block;font-size:12px;color:var(--muted)}
+tr.pend td{color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.pend-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.pend-group{background:var(--surface-2);border-radius:5px;padding:10px 12px;font-size:13.5px}
+.pend-group b{font-family:var(--f-display);font-size:17px;font-weight:600;display:block;margin-bottom:4px}
+.pend-group ul{margin:0;padding-left:18px;color:var(--muted)}
+.cmp-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.note{border-left:4px solid var(--brand);background:var(--surface-2);border-radius:0 5px 5px 0;padding:10px 12px;font-size:14px}
+.note.w{border-color:var(--cls-b)}
+.note b{display:block;font-family:var(--f-display);font-size:18px;font-weight:600;margin-bottom:2px}
+table.cmp{min-width:640px}
+.pbar{display:flex;height:12px;border-radius:3px;overflow:hidden;background:var(--surface-2)}
+.pbar i{display:block;height:100%}
+tr.tot td{font-weight:600;border-top:2px solid var(--fg)}
+@media (max-width:900px){.cmp-notes{grid-template-columns:1fr}}
+.abc{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.abc-row{display:grid;grid-template-columns:28px minmax(0,1.25fr) minmax(0,1.6fr) 104px;gap:14px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.abc-head{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 0 6px}
+.abc-head .r{text-align:right}
+.abc .rk{font-family:var(--f-mono);color:var(--muted);font-size:13px}
+.abc .nm{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.abc .nm b{font-weight:600;display:block;line-height:1.3}
+.abc .nm small{color:var(--muted);font-size:12.5px}
+.abc .br{display:flex;align-items:center;gap:10px;min-width:0}
+.abc .trk{flex:1;height:14px;min-width:0}
+.abc .trk i{display:block;height:100%;border-radius:2px}
+.abc .bv{white-space:nowrap;font-family:var(--f-mono);font-size:12.5px;color:var(--muted);min-width:132px}
+.abc .bv b{color:var(--fg);font-weight:500;font-size:13.5px}
+.abc .cu{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-family:var(--f-mono);font-size:13px}
+.abc .cm{width:100%;height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+.abc .cm i{display:block;height:100%;background:var(--muted)}
+.abc-cut{position:relative;height:0;border-top:2px dashed var(--fg);opacity:.75;margin:-1px 0 0}
+.abc-cut span{position:absolute;right:0;top:-10px;background:var(--surface);padding:0 0 0 8px;font-family:var(--f-mono);font-size:11px;color:var(--fg)}
+@media (max-width:700px){
+  .abc-row{grid-template-columns:24px minmax(0,1fr) 78px;row-gap:6px}
+  .abc .br{grid-column:2 / 4;grid-row:2}
+  .abc-head span:nth-child(3){display:none}
+  .abc .bv{min-width:0}
+}
+.pareto-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;margin-top:10px;padding-top:14px;border-top:1px solid var(--line)}
+.pareto-h h3{font-size:19px}
+#pareto{display:block}
+.status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);display:inline-block}
+.status.err{color:var(--warn-fg);background:var(--warn-bg);padding:8px 12px;border-radius:5px}
+.status .novo{color:var(--brand)}
+[hidden]{display:none!important}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+
+@media (max-width:900px){.classes{grid-template-columns:1fr!important}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.kpis{grid-template-columns:1fr}.seg button{padding:8px 11px}}
+</style>
+</body>
+</html>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Goiás Verde · Engenharia · Orçamento de obras</div>
+      <h1>Ampliação Estrutural DMP/DPA</h1>
+      <p>Curva ABC · concentração do custo orçado por item em cada projeto, para priorizar negociação, cotação e acompanhamento.</p>
+    </div>
+    <div class="rule" aria-label="Regra de classificação">
+      <span class="chip a">A ≤ 80%</span><span class="chip b">B 80–90%</span><span class="chip c">C &gt; 90%</span>
+    </div>
+  </header>
+
+  <div class="status" id="status"><span class="dot"></span>Carregando planilha…</div>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Projeto" id="projs"></div>
+    <div class="seg small" role="group" aria-label="Agrupamento">
+      <button id="g-item" data-g="item" aria-pressed="true">Por item</button>
+      <button id="g-app" data-g="app" aria-pressed="false">Por aplicação</button>
+    </div>
+  </div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel">
+    <div class="panel-h">
+      <h2 id="chart-title">Curva ABC</h2>
+      <span class="eyebrow">Ordenado do maior para o menor valor</span>
+    </div>
+    <div class="classes" id="classes"></div>
+    <div id="abc" class="abc"></div>
+    <div class="pareto-h"><h3>Curva de Pareto</h3>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--cls-a)"></i>A</span><span><i class="sw" style="background:var(--cls-b)"></i>B</span><span><i class="sw" style="background:var(--cls-c)"></i>C</span>
+        <span><i class="sw" style="background:var(--curve);height:2px"></i>% acumulado</span></div></div>
+    <div class="chart-box"><svg id="pareto" role="img" aria-label="Curva de Pareto"></svg></div>
+    <div class="insight" id="insight"></div>
+  </section>
+
+
+  <section class="panel" id="cmp-panel" hidden>
+    <div class="panel-h">
+      <h2 id="cmp-title">Comparativo por aplicação</h2>
+      <span class="eyebrow">Somente valores já orçados</span>
+    </div>
+    <div class="cmp-notes" id="cmp-notes"></div>
+    <div class="table-box"><table class="cmp"><thead id="cmp-head"></thead><tbody id="cmp"></tbody></table></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h">
+      <h2 id="table-title">Detalhamento</h2>
+      <div class="filters">
+        <div class="seg small" role="group" aria-label="Filtrar classe" id="fcls">
+          <button data-f="all" aria-pressed="true">Todas</button>
+          <button data-f="A" aria-pressed="false">A</button>
+          <button data-f="B" aria-pressed="false">B</button>
+          <button data-f="C" aria-pressed="false">C</button>
+          <button data-f="N" aria-pressed="false">Sem preço</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-box"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h">
+      <h2>Itens sem preço orçado</h2>
+      <span class="eyebrow" id="pend-count"></span>
+    </div>
+    <p style="margin:0;color:var(--muted);font-size:14px">Estes itens estão na lista com valor zero e ficam fora da curva. Quando forem cotados, a classificação muda, por isso o total atual é parcial.</p>
+    <div class="pend-list" id="pend"></div>
+  </section>
+
+  <footer><span id="fonte">Fonte: dados/planilha.xlsx.</span> Classificação pelo % acumulado incluindo o próprio item, em ordem decrescente de valor. A página verifica a planilha a cada minuto e se atualiza sozinha.</footer>
+</div>
+
+<script>
+/* ---------- Leitor de .xlsx embutido (sem bibliotecas externas) ----------
+   Um .xlsx é um ZIP com arquivos XML. Lemos o ZIP, descompactamos com o
+   DecompressionStream do navegador e interpretamos as planilhas. Fórmulas
+   usam o último valor calculado salvo pelo Excel. */
+async function unzip(buf){
+  const dv=new DataView(buf), u8=new Uint8Array(buf), files={};
+  let e=buf.byteLength-22;
+  while(e>=0 && dv.getUint32(e,true)!==0x06054b50) e--;
+  if(e<0) throw new Error("arquivo não é um .xlsx válido");
+  const n=dv.getUint16(e+10,true); let p=dv.getUint32(e+16,true);
+  const td=new TextDecoder();
+  for(let i=0;i<n;i++){
+    const method=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true);
+    const nl=dv.getUint16(p+28,true), xl=dv.getUint16(p+30,true), cl=dv.getUint16(p+32,true);
+    const off=dv.getUint32(p+42,true), name=td.decode(u8.subarray(p+46,p+46+nl));
+    files[name]={method,csize,off};
+    p+=46+nl+xl+cl;
+  }
+  return async name=>{
+    const f=files[name]; if(!f) return null;
+    const ln=dv.getUint16(f.off+26,true), lx=dv.getUint16(f.off+28,true);
+    const data=u8.subarray(f.off+30+ln+lx, f.off+30+ln+lx+f.csize);
+    if(f.method===0) return td.decode(data);
+    const s=new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+    return await new Response(s).text();
+  };
+}
+async function lerXlsx(buf){
+  const get=await unzip(buf), xml=s=>new DOMParser().parseFromString(s,"application/xml");
+  const tags=(d,t)=>[...d.getElementsByTagNameNS("*",t)];
+  const ss=[]; const sst=await get("xl/sharedStrings.xml");
+  if(sst) tags(xml(sst),"si").forEach(si=>ss.push(tags(si,"t").map(t=>t.textContent).join("")));
+  const rels={}; tags(xml(await get("xl/_rels/workbook.xml.rels")),"Relationship").forEach(r=>rels[r.getAttribute("Id")]=r.getAttribute("Target"));
+  const wb=xml(await get("xl/workbook.xml")), sheets=[];
+  for(const s of tags(wb,"sheet")){
+    const rid=s.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships","id")||s.getAttribute("r:id");
+    let tgt=rels[rid]||""; tgt=tgt.startsWith("/")?tgt.slice(1):"xl/"+tgt.replace(/^\.\//,"");
+    const txt=await get(tgt); if(!txt) continue;
+    const rows=[];
+    tags(xml(txt),"row").forEach(row=>{
+      const ri=+row.getAttribute("r")-1, arr=[];
+      tags(row,"c").forEach(c=>{
+        const ref=c.getAttribute("r"), t=c.getAttribute("t");
+        let ci=0; for(const ch of ref.replace(/\d+/g,"")) ci=ci*26+(ch.charCodeAt(0)-64); ci--;
+        const v=tags(c,"v")[0]?.textContent;
+        let val=null;
+        if(t==="s") val=ss[+v]; else if(t==="inlineStr") val=tags(c,"t").map(x=>x.textContent).join("");
+        else if(t==="str"||t==="e") val=v??null; else if(t==="b") val=v==="1"; else if(v!=null&&v!=="") val=Number(v);
+        arr[ci]=val;
+      });
+      rows[ri]=arr;
+    });
+    for(let i=0;i<rows.length;i++) if(!rows[i]) rows[i]=[];
+    sheets.push({name:s.getAttribute("name"),rows});
+  }
+  let modified=null; const core=await get("docProps/core.xml");
+  if(core){const m=tags(xml(core),"modified")[0]; if(m) modified=new Date(m.textContent);}
+  return {sheets,modified};
+}
+
+const ARQ = "dados/planilha.xlsx";
+const INTERVALO_MS = 60000; // verifica a planilha a cada 1 minuto
+let DATA = {}, ORDER = [], SIG = "", MODIF = null;
+const NAMES = new Proxy({}, {get:(_,k)=>k});
+const state = {p:null, g:"item", f:"all"};
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+const brl2 = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:2});
+const pct = v => (v*100).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1})+"%";
+const mi = v => v>=1e6 ? "R$ "+(v/1e6).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+" mi" : "R$ "+(v/1e3).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil";
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cls = c => c<=0.80+1e-9 ? "A" : c<=0.90+1e-9 ? "B" : "C";
+const norm = s => String(s??"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\s+/g," ").trim().toLowerCase();
+const fmtDT = d => d.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+
+/* ---------- Leitura da planilha ---------- */
+function num(v){
+  if(typeof v==="number") return isFinite(v)?v:null;
+  if(v==null) return null;
+  const s=String(v).replace(/[R$\s]/g,"");
+  if(!s) return null;
+  const n=Number(s.includes(",")?s.replace(/\./g,"").replace(",","."):s);
+  return isFinite(n)?n:null;
+}
+function parseSheet(rows){
+  let h=-1, col={};
+  for(let i=0;i<Math.min(rows.length,40);i++){
+    const r=rows[i]||[], idx=k=>Array.from(r).findIndex(c=>norm(c)===k);
+    if(idx("descricao")>=0 && idx("preco total")>=0){
+      h=i;
+      col={item:idx("item"),local:idx("local"),desc:idx("descricao"),qtd:idx("quantidade"),un:idx("unidade"),
+           pu:idx("preco unitario"),total:idx("preco total"),app:idx("aplicacao")};
+      col.obs = col.app>=0 && (r[col.app+1]==null || norm(r[col.app+1])==="observacao" || norm(r[col.app+1])==="observacoes") ? col.app+1 : -1;
+      break;
+    }
+  }
+  if(h<0) return null;
+  const out=[];
+  for(let i=h+1;i<rows.length;i++){
+    const r=rows[i]||[], g=k=>col[k]>=0?r[col[k]]:null;
+    const desc=g("desc");
+    if(desc==null || !String(desc).trim() || norm(desc)==="descricao") continue;
+    const ob=g("obs");
+    out.push({
+      item:g("item"), local:g("local")?String(g("local")).trim():"", desc:String(desc).trim(),
+      qtd:num(g("qtd")), un:g("un")?String(g("un")).trim():"", pu:num(g("pu")), total:num(g("total"))||0,
+      app:g("app")?String(g("app")).trim():"Não definida",
+      obs:(ob!=null && typeof ob==="string")?ob.trim():""
+    });
+  }
+  return out;
+}
+function assinatura(buf){ // FNV-1a do arquivo, para saber se mudou
+  const b=new Uint8Array(buf); let h=0x811c9dc5;
+  for(let i=0;i<b.length;i++){h^=b[i]; h=Math.imul(h,0x01000193);}
+  return b.length+":"+(h>>>0).toString(16);
+}
+function setStatus(msg, erro){
+  const el=document.getElementById("status");
+  el.className="status"+(erro?" err":"");
+  el.innerHTML=msg;
+}
+async function carregar(){
+  try{
+    const res=await fetch(ARQ+"?t="+Date.now(),{cache:"no-store"});
+    if(!res.ok) throw new Error("não encontrei "+ARQ+" (HTTP "+res.status+")");
+    const buf=await res.arrayBuffer();
+    const sig=assinatura(buf);
+    const agora=fmtDT(new Date());
+    if(sig===SIG){ setStatus(statusTxt(agora)); return; }
+    const wb=await lerXlsx(buf);
+    const d={}, order=[];
+    wb.sheets.forEach(s=>{ const r=parseSheet(s.rows); if(r && r.length){ d[s.name]=r; order.push(s.name); } });
+    if(!order.length) throw new Error("nenhuma aba tem as colunas “Descrição” e “Preço Total”");
+    const primeira = !SIG;
+    DATA=d; ORDER=order; SIG=sig;
+    MODIF = wb.modified;
+    if(!ORDER.includes(state.p)) state.p=ORDER[0];
+    montarProjetos(); render(); renderCompare();
+    document.getElementById("fonte").textContent = `Fonte: ${ARQ} · abas lidas: ${ORDER.join(", ")}.`;
+    setStatus(statusTxt(agora) + (primeira?"":` <b class="novo">· dados atualizados</b>`));
+  }catch(e){
+    setStatus(`Não foi possível ler a planilha: ${esc(e.message)}. Nova tentativa em 1 minuto.`, true);
+  }
+}
+function statusTxt(agora){
+  return `<span class="dot"></span>Planilha salva em <b>${MODIF?fmtDT(MODIF):"—"}</b> · verificada às ${agora.split(" ")[1]||agora}`;
+}
+function montarProjetos(){
+  document.getElementById("projs").innerHTML = ORDER.map(n=>
+    `<button data-p="${esc(n)}" aria-pressed="${n===state.p}">${esc(n)}</button>`).join("");
+}
+
+function build(){
+  const raw = DATA[state.p];
+  let rows;
+  if(state.g==="item"){
+    rows = raw.map(r=>({...r, label:r.desc}));
+  } else {
+    const m = new Map();
+    raw.forEach(r=>{
+      const k=r.app; if(!m.has(k)) m.set(k,{label:k,app:k,total:0,n:0,priced:0});
+      const o=m.get(k); o.total+=r.total; o.n++; if(r.total>0) o.priced++;
+    });
+    rows=[...m.values()];
+  }
+  const priced = rows.filter(r=>r.total>0).sort((a,b)=>b.total-a.total);
+  const pend = rows.filter(r=>!(r.total>0));
+  const total = priced.reduce((s,r)=>s+r.total,0);
+  let acc=0;
+  priced.forEach((r,i)=>{acc+=r.total; r.rank=i+1; r.share=r.total/total; r.cum=acc/total; r.cls=cls(r.cum);});
+  pend.forEach(r=>{r.cls="N";});
+  return {raw, priced, pend, total};
+}
+
+function render(){
+  const {raw, priced, pend, total} = build();
+  const byC = {A:[],B:[],C:[]}; priced.forEach(r=>byC[r.cls].push(r));
+  const pendItems = raw.filter(r=>!(r.total>0));
+  const unit = state.g==="item" ? "itens" : "aplicações";
+  const U = n => n===1 ? (state.g==="item"?"item":"aplicação") : unit;
+
+  // KPIs
+  const top = priced[0];
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><span class="eyebrow">Total orçado · ${NAMES[state.p]}</span><span class="v num">${mi(total)}</span><span class="s num">${brl2(total)}</span></div>
+    <div class="kpi"><span class="eyebrow">Classe A</span><span class="v num">${byC.A.length} ${U(byC.A.length)}</span><span class="s num">${pct(byC.A.reduce((s,r)=>s+r.total,0)/total)} do valor · ${pct(byC.A.length/priced.length)} da quantidade</span></div>
+    <div class="kpi"><span class="eyebrow">${state.g==="item"?"Maior item":"Maior aplicação"}</span><span class="v num">${pct(top.share)}</span><span class="s">${esc(top.label)}</span></div>
+    <div class="kpi warn"><span class="eyebrow">Itens sem preço</span><span class="v num">${pendItems.length} de ${raw.length}</span><span class="s">Orçamento ainda incompleto</span></div>`;
+
+  // Classes
+  const cfg = {A:["Classe A","até 80% do valor","var(--cls-a)"],B:["Classe B","de 80% a 90%","var(--cls-b)"],C:["Classe C","acima de 90%","var(--cls-c)"]};
+  document.getElementById("classes").innerHTML = ["A","B","C"].map(k=>{
+    const v=byC[k].reduce((s,r)=>s+r.total,0), sh=total? v/total:0;
+    return `<div class="cls"><div class="letter" style="background:${cfg[k][2]}">${k}</div>
+      <div><div class="t">${byC[k].length} ${U(byC[k].length)} <span class="m">· ${cfg[k][1]}</span></div>
+      <div class="bar"><i style="width:${(sh*100).toFixed(1)}%;background:${cfg[k][2]}"></i></div></div>
+      <div class="val num">${mi(v)}<small>${pct(sh)}</small></div></div>`;
+  }).join("");
+
+  const aNames = byC.A.map(r=>r.label.trim()).join(", ");
+  document.getElementById("insight").innerHTML =
+    `<b>${byC.A.length} de ${priced.length} ${unit} ${state.g==="item"?"precificados":"precificadas"}</b> concentram ${pct(byC.A.reduce((s,r)=>s+r.total,0)/total)} do custo: ${esc(aNames)}. Esse é o grupo para priorizar cotação e negociação.`;
+
+  drawChart(priced);
+  window.__last=priced; drawPareto(priced);
+
+  // Table
+  document.getElementById("chart-title").textContent = `Curva ABC · ${NAMES[state.p]}`;
+  document.getElementById("table-title").textContent = state.g==="item" ? "Detalhamento por item" : "Detalhamento por aplicação";
+  const showLocal = state.g==="item" && raw.some(r=>r.local);
+  document.getElementById("thead").innerHTML = state.g==="item"
+    ? `<tr><th>#</th><th>Classe</th><th>Descrição</th>${showLocal?"<th>Local</th>":""}<th>Aplicação</th><th class="r">Qtd</th><th class="r">Preço unit.</th><th class="r">Total</th><th class="r">% item</th><th class="r">% acum.</th></tr>`
+    : `<tr><th>#</th><th>Classe</th><th>Aplicação</th><th class="r">Itens</th><th class="r">Precificados</th><th class="r">Total</th><th class="r">% aplicação</th><th class="r">% acum.</th></tr>`;
+  const all = [...priced, ...pend].filter(r=>state.f==="all"||r.cls===state.f);
+  const qty = r => r.qtd==null ? "—" : Number(r.qtd).toLocaleString("pt-BR",{maximumFractionDigits:2})+" "+esc(r.un||"");
+  document.getElementById("tbody").innerHTML = all.map(r=>{
+    const b=`<span class="badge ${r.cls}">${r.cls==="N"?"—":r.cls}</span>`;
+    const p=r.cls==="N";
+    if(state.g==="item") return `<tr class="${p?"pend":""}"><td class="num">${r.rank??""}</td><td>${b}</td>
+      <td>${esc(r.desc)}${r.obs?`<span class="sub">${esc(r.obs)}</span>`:""}</td>${showLocal?`<td>${esc(r.local)}</td>`:""}
+      <td>${esc(r.app)}</td><td class="r">${qty(r)}</td><td class="r">${r.pu?brl2(r.pu):"—"}</td>
+      <td class="r">${p?"—":brl2(r.total)}</td><td class="r">${p?"":pct(r.share)}</td><td class="r">${p?"":pct(r.cum)}</td></tr>`;
+    return `<tr class="${p?"pend":""}"><td class="num">${r.rank??""}</td><td>${b}</td><td>${esc(r.label)}</td>
+      <td class="r">${r.n}</td><td class="r">${r.priced}</td><td class="r">${p?"—":brl2(r.total)}</td>
+      <td class="r">${p?"":pct(r.share)}</td><td class="r">${p?"":pct(r.cum)}</td></tr>`;
+  }).join("") || `<tr><td colspan="10" style="color:var(--muted)">Nenhum registro nesta classe.</td></tr>`;
+
+  // Pending
+  const g=new Map(); pendItems.forEach(r=>{if(!g.has(r.app)) g.set(r.app,[]); g.get(r.app).push(r);});
+  document.getElementById("pend-count").textContent = `${pendItems.length} itens · ${g.size} aplicações`;
+  document.getElementById("pend").innerHTML=[...g.entries()].sort((a,b)=>b[1].length-a[1].length).map(([k,v])=>
+    `<div class="pend-group"><b>${esc(k)} <span class="num" style="color:var(--muted);font-weight:500">(${v.length})</span></b><ul>${v.map(r=>`<li>${esc(r.desc)}${r.obs?` · <em>${esc(r.obs)}</em>`:""}</li>`).join("")}</ul></div>`).join("");
+}
+
+function drawChart(rows){
+  const box=document.getElementById("abc");
+  const maxSh=rows[0]?.share||1;
+  const lim={A:"Limite 80%",B:"Limite 90%"};
+  let h=`<div class="abc-row abc-head"><span>#</span><span>${state.g==="item"?"Item":"Aplicação"}</span><span>Participação no total</span><span class="r">Acumulado</span></div>`;
+  rows.forEach((r,i)=>{
+    const sub = state.g==="item" ? esc(r.app)+(r.local?` · ${esc(r.local)}`:"") : `${r.n} ${r.n===1?"item":"itens"} · ${r.priced} com preço`;
+    h+=`<div class="abc-row" title="${esc(r.label)} — ${brl2(r.total)}">
+      <span class="rk num">${r.rank}</span>
+      <span class="nm"><span class="badge ${r.cls}">${r.cls}</span><span><b>${esc(r.label.trim())}</b><small>${sub}</small></span></span>
+      <span class="br"><span class="trk"><i style="width:${Math.max(0.6,r.share/maxSh*100).toFixed(2)}%;background:var(--cls-${r.cls.toLowerCase()})"></i></span><span class="bv num"><b>${pct(r.share)}</b> ${mi(r.total)}</span></span>
+      <span class="cu num"><span>${pct(r.cum)}</span><span class="cm"><i style="width:${(r.cum*100).toFixed(1)}%"></i></span></span>
+    </div>`;
+    const nx=rows[i+1];
+    if(nx && nx.cls!==r.cls && lim[r.cls]) h+=`<div class="abc-cut"><span>${lim[r.cls]} · fim da classe ${r.cls}</span></div>`;
+  });
+  box.innerHTML=h;
+}
+
+function drawPareto(rows){
+  const svg=document.getElementById("pareto");
+  const cw=svg.parentElement.clientWidth||900;
+  const byItem=state.g==="item";
+  const n=rows.length, W=Math.max(cw,n*46+130), H=byItem?400:320;
+  const m={l:66,r:50,t:58,b:byItem?128:52};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, max=rows[0]?.total||1;
+  const step=iw/n, bw=Math.min(byItem?40:60,step*0.6);
+  const nice=v=>{const p=Math.pow(10,Math.floor(Math.log10(v)));const f=v/p;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*p;};
+  const yMax=nice(max*1.08), y=v=>m.t+ih-(v/yMax)*ih, yp=v=>m.t+ih-v*ih;
+  const css=k=>`var(--cls-${k.toLowerCase()})`;
+  const fmtAx=v=>v===0?"0":v>=1e6?(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:2})+" mi":(v/1e3).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil";
+  const short=v=>v>=1e6?(v/1e6).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+" mi":(v/1e3).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil";
+  const cx=i=>m.l+step*i+step/2;
+  let s="";
+  // faixas de classe (fundo)
+  ["A","B","C"].forEach(k=>{
+    const idx=rows.map((r,i)=>r.cls===k?i:-1).filter(i=>i>=0); if(!idx.length) return;
+    const x0=m.l+step*idx[0], x1=m.l+step*(idx[idx.length-1]+1);
+    s+=`<rect x="${x0}" y="${m.t-54}" width="${x1-x0}" height="${ih+54}" fill="${css(k)}" opacity="0.08"/>`;
+    s+=`<rect x="${x0}" y="${m.t-54}" width="${x1-x0}" height="3" fill="${css(k)}"/>`;
+    s+=`<text class="zone" x="${(x0+x1)/2}" y="${m.t-36}" text-anchor="middle" fill="${css(k)}">Classe ${k}</text>`;
+  });
+  // grade e eixo R$
+  for(let i=0;i<=4;i++){const v=yMax*i/4, yy=y(v);
+    s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${yy}" y2="${yy}" stroke="var(--line)" stroke-width="1"/>`;
+    s+=`<text class="ax" x="${m.l-10}" y="${yy+4}" text-anchor="end">${fmtAx(v)}</text>`;}
+  s+="";
+  // eixo % acumulado
+  [0,0.2,0.4,0.6,0.8,0.9,1].forEach(v=>{
+    s+=`<text class="ax${v===0.8||v===0.9?" cut":""}" x="${W-m.r+8}" y="${yp(v)+4}">${Math.round(v*100)}%</text>`;});
+  [[0.8],[0.9]].forEach(([v])=>{
+    s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${yp(v)}" y2="${yp(v)}" stroke="var(--fg)" stroke-dasharray="6 4" stroke-width="1.2" opacity="0.55"/>`;});
+  // barras
+  rows.forEach((r,i)=>{const x=cx(i), top=y(r.total), h=m.t+ih-top;
+    s+=`<rect x="${x-bw/2}" y="${top}" width="${bw}" height="${Math.max(2,h)}" fill="${css(r.cls)}" rx="2"><title>#${r.rank} ${esc(r.label)}\n${brl2(r.total)} · ${pct(r.share)} · acum. ${pct(r.cum)} · Classe ${r.cls}</title></rect>`;
+    const inside=h>44 && bw>=40, showV=!byItem;
+    if(inside){
+      s+=`<text class="dl in" x="${x}" y="${m.t+ih-(showV?22:10)}" text-anchor="middle">${pct(r.share)}</text>`;
+      if(showV) s+=`<text class="dv in" x="${x}" y="${m.t+ih-8}" text-anchor="middle">${short(r.total)}</text>`;
+    } else {
+      s+=`<text class="dl" x="${x}" y="${top-8}" text-anchor="middle">${pct(r.share)}</text>`;
+    }
+    // rótulo do eixo X
+    const name=r.label.trim(), cut=byItem?17:16, nm=name.length>cut?name.slice(0,cut-1)+"…":name;
+    s+=`<text class="ax n" x="${x}" y="${H-m.b+18}" text-anchor="middle">${r.rank}</text>`;
+    s+=byItem
+      ? `<text class="xl" transform="translate(${x+4},${H-m.b+30}) rotate(-35)" text-anchor="end">${esc(nm)}<title>${esc(name)}</title></text>`
+      : `<text class="xl" x="${x}" y="${H-m.b+36}" text-anchor="middle">${esc(nm)}</text>`;
+  });
+  // curva acumulada
+  const pts=rows.map((r,i)=>`${cx(i)},${yp(r.cum)}`).join(" ");
+  s+=`<polyline points="${pts}" fill="none" stroke="var(--curve)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  rows.forEach((r,i)=>{
+    s+=`<circle cx="${cx(i)}" cy="${yp(r.cum)}" r="4.5" fill="var(--surface)" stroke="var(--curve)" stroke-width="2.5"><title>Acumulado ${pct(r.cum)}</title></circle>`;
+    if(i>0) s+=`<text class="cl" x="${cx(i)}" y="${yp(r.cum)-11}" text-anchor="middle">${pct(r.cum)}</text>`;
+  });
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("width",W); svg.setAttribute("height",H);
+  svg.innerHTML=s;
+}
+
+function renderCompare(){
+  const panel=document.getElementById("cmp-panel");
+  if(ORDER.length<2){ panel.hidden=true; return; }
+  panel.hidden=false;
+  const P=ORDER, two=P.length===2, cores=["var(--cls-c)","var(--brand)","var(--cls-b)","var(--fg)"];
+  const sum=arr=>arr.reduce((s,r)=>s+r.total,0);
+  const apps=new Map();
+  P.forEach((p,j)=>DATA[p].forEach(r=>{
+    if(!apps.has(r.app)) apps.set(r.app,P.map(()=>0)); apps.get(r.app)[j]+=r.total; }));
+  const rows=[...apps.entries()].filter(([k,v])=>v.some(x=>x>0)).sort((a,b)=>b[1].reduce((s,x)=>s+x,0)-a[1].reduce((s,x)=>s+x,0));
+  const tot=P.map(p=>sum(DATA[p]));
+  const mx=Math.max(...rows.flatMap(([k,v])=>v));
+  const dif=(a,b)=>{const d=b-a; return `<span style="color:${d>0?"var(--warn-fg)":d<0?"var(--brand)":"var(--muted)"}">${d>0?"+":""}${brl(d)}</span>`;};
+  document.getElementById("cmp-title").textContent=`Comparativo ${P.join(" × ")} por aplicação`;
+  document.getElementById("cmp-head").innerHTML=`<tr><th>Aplicação</th>${P.map(p=>`<th class="r">${esc(p)}</th>`).join("")}${two?`<th class="r">Diferença (${esc(P[1])} − ${esc(P[0])})</th>`:""}<th style="width:26%">Proporção</th></tr>`;
+  document.getElementById("cmp").innerHTML=rows.map(([k,v])=>`<tr><td>${esc(k)}</td>
+    ${v.map(x=>`<td class="r">${x?brl(x):"—"}</td>`).join("")}${two?`<td class="r">${dif(v[0],v[1])}</td>`:""}
+    <td><div style="display:flex;flex-direction:column;gap:3px">${v.map((x,j)=>`<div class="pbar"><i style="width:${x/mx*100}%;background:${cores[j%4]}" title="${esc(P[j])}"></i></div>`).join("")}</div></td></tr>`).join("")
+    + `<tr class="tot"><td>Total</td>${tot.map(x=>`<td class="r">${brl(x)}</td>`).join("")}${two?`<td class="r">${dif(tot[0],tot[1])}</td>`:""}
+      <td><span class="legend">${P.map((p,j)=>`<span><i class="sw" style="background:${cores[j%4]}"></i>${esc(p)}</span>`).join("")}</span></td></tr>`;
+
+  // Observações geradas a partir dos dados
+  const notes=[];
+  // 1) maior diferença relativa entre projetos numa mesma aplicação
+  let best=null;
+  rows.forEach(([k,v])=>{const pos=v.filter(x=>x>0); if(pos.length<2) return;
+    const hi=Math.max(...v), lo=Math.min(...pos), r=hi/lo; if(!best||r>best.r) best={k,v,r,hi,lo};});
+  if(best && best.r>=1.5){
+    const ph=P[best.v.indexOf(best.hi)], pl=P[best.v.indexOf(best.lo)];
+    const pend=P.some(p=>DATA[p].some(r=>r.app===best.k && /solicitad|verificar/i.test(r.obs)));
+    notes.push(`<div class="note w"><b>${esc(best.k)} ${best.r.toLocaleString("pt-BR",{maximumFractionDigits:1})}× maior em ${esc(ph)}</b>${brl(best.hi)} contra ${brl(best.lo)} em ${esc(pl)}.${pend?" Há valores com orçamento ainda em aberto; confirmar escopo antes de comparar.":" Confirmar se o escopo é o mesmo."}</div>`);
+  }
+  // 2) projeto dividido em mais de um local
+  P.forEach((p,j)=>{
+    const locs=new Map(); DATA[p].forEach(r=>{if(r.local){locs.set(r.local,(locs.get(r.local)||0)+r.total);}});
+    if(locs.size<2 || notes.length>=3) return;
+    const t=tot[j], parts=[...locs.entries()].sort((a,b)=>b[1]-a[1]);
+    let extra="";
+    if(two){const o=tot[1-j], main=parts[0][1]; extra=` Só ${esc(parts[0][0])}: ${pct(Math.abs(main/o-1))} ${main>o?"a mais":"a menos"} que ${esc(P[1-j])}.`;}
+    notes.push(`<div class="note"><b>${esc(p)} por local</b>${parts.map(([l,v])=>`${esc(l)} ${brl(v)} (${pct(v/t)})`).join(" · ")}.${extra}</div>`);
+  });
+  // 3) itens classe A que só existem em um projeto
+  P.forEach((p,j)=>{
+    if(notes.length>=3) return;
+    const t=tot[j]; let acc=0;
+    const pr=DATA[p].filter(r=>r.total>0).sort((a,b)=>b.total-a.total);
+    const outros=new Set(P.filter(q=>q!==p).flatMap(q=>DATA[q].map(r=>norm(r.desc))));
+    const ex=pr.filter(r=>{acc+=r.total; return acc/t<=0.80+1e-9 && !outros.has(norm(r.desc));});
+    if(ex.length){const r=ex[0];
+      notes.push(`<div class="note w"><b>${esc(r.desc)}: ${pct(r.total/t)} de ${esc(p)}</b>${brl(r.total)} num item classe A que só aparece neste projeto. Vale uma segunda cotação.</div>`);}
+  });
+  document.getElementById("cmp-notes").innerHTML=notes.join("");
+}
+
+function bindSeg(sel, key, attr){
+  document.querySelectorAll(sel+" button").forEach(b=>b.addEventListener("click",()=>{
+    state[key]=b.dataset[attr];
+    document.querySelectorAll(sel+" button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+    render();
+  }));
+}
+document.getElementById("projs").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  state.p=b.dataset.p; montarProjetos(); render();
+});
+bindSeg('[aria-label="Agrupamento"]',"g","g");
+bindSeg('#fcls',"f","f");
+carregar();
+setInterval(carregar, INTERVALO_MS);
+let __rt;window.addEventListener("resize",()=>{clearTimeout(__rt);__rt=setTimeout(()=>window.__last&&drawPareto(window.__last),150);});
+</script>
+</body>
+</html>
