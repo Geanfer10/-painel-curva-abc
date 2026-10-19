@@ -325,11 +325,14 @@ function parseSheet(rows){
   let h=-1, col={};
   for(let i=0;i<Math.min(rows.length,40);i++){
     const r=rows[i]||[], idx=k=>Array.from(r).findIndex(c=>norm(c)===k);
-    if(idx("descricao")>=0 && idx("preco total")>=0){
+    const dk=["descricao","insumo ou servico","insumo/servico","servico"].find(k=>idx(k)>=0);
+    if(dk && idx("preco total")>=0){
       h=i;
-      col={item:idx("item"),local:idx("local"),desc:idx("descricao"),qtd:idx("quantidade"),un:idx("unidade"),
+      col={item:idx("item"),local:idx("local"),desc:idx(dk),qtd:idx("quantidade"),un:idx("unidade"),
            pu:idx("preco unitario"),total:idx("preco total"),app:idx("aplicacao")};
-      col.obs = col.app>=0 && (r[col.app+1]==null || norm(r[col.app+1])==="observacao" || norm(r[col.app+1])==="observacoes") ? col.app+1 : -1;
+      // observação: primeira coluna sem título à direita de "Aplicação" (ou com título Observação)
+      col.obs=-1;
+      if(col.app>=0) for(let j=col.app+1;j<=col.app+3;j++){ const h=r[j]; if(h==null || /^observac/.test(norm(h))){ col.obs=j; break; } }
       break;
     }
   }
@@ -338,7 +341,7 @@ function parseSheet(rows){
   for(let i=h+1;i<rows.length;i++){
     const r=rows[i]||[], g=k=>col[k]>=0?r[col[k]]:null;
     const desc=g("desc");
-    if(desc==null || !String(desc).trim() || norm(desc)==="descricao") continue;
+    if(desc==null || !String(desc).trim() || norm(desc)==="descricao" || norm(desc)==="insumo ou servico") continue;
     const ob=g("obs");
     out.push({
       item:g("item"), local:g("local")?String(g("local")).trim():"", desc:String(desc).trim(),
