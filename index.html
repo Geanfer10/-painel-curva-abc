@@ -142,6 +142,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .it.pend .iv{color:var(--warn)}
 .it small{display:block;color:var(--muted);font-size:12px}
 .note{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+.pdfs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pdf{display:inline-flex;align-items:center;gap:4px;font:500 12px var(--f-mono);color:var(--c);text-decoration:none;border:1px solid var(--rule);background:var(--panel);border-radius:5px;padding:3px 8px}
+.pdf:hover{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,var(--panel))}
+.pdf:focus-visible{outline:2px solid var(--c);outline-offset:2px}
 /* pareto */
 :root{--cA:#145c32;--cB:#c7861a;--cC:#7a8a96}
 .par{margin-top:28px;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:22px 22px 14px;box-shadow:0 6px 16px -12px rgba(15,46,28,.45)}
@@ -268,8 +272,9 @@ function parseSheet(rows){
       col={item:idx("item"),local:idx("local"),desc:idx(dk),qtd:idx("quantidade"),un:idx("unidade"),
            pu:idx("preco unitario"),total:idx("preco total"),app:idx("aplicacao")};
       // observação: primeira coluna sem título à direita de "Aplicação" (ou com título Observação)
+      col.orc=Array.from(r).findIndex(c=>/^orcamentos?( \(pdf\)| pdf)?$/.test(norm(c)));
       col.obs=-1;
-      if(col.app>=0) for(let j=col.app+1;j<=col.app+3;j++){ const h=r[j]; if(h==null || /^observac/.test(norm(h))){ col.obs=j; break; } }
+      if(col.app>=0) for(let j=col.app+1;j<=col.app+3;j++){ const h=r[j]; if(j!==col.orc && (h==null || /^observac/.test(norm(h)))){ col.obs=j; break; } }
       break;
     }
   }
@@ -284,7 +289,8 @@ function parseSheet(rows){
       item:g("item"), local:g("local")?String(g("local")).trim():"", desc:String(desc).trim(),
       qtd:num(g("qtd")), un:g("un")?String(g("un")).trim():"", pu:num(g("pu")), total:num(g("total"))||0,
       app:g("app")?String(g("app")).trim():"Não definida",
-      obs:(ob!=null && typeof ob==="string")?ob.trim():""
+      obs:(ob!=null && typeof ob==="string")?ob.trim():"",
+      orc:g("orc")!=null?String(g("orc")).trim():""
     });
   }
   return out;
@@ -298,7 +304,7 @@ const ARQ="dados/planilha.xlsx", INTERVALO_MS=60000;
 let DATA={}, SIG="";
 function agrupar(itens){
   const g=new Map();
-  itens.forEach(x=>{const k=x.app||"Não definida"; if(!g.has(k)) g.set(k,[]); g.get(k).push([x.desc,x.total,x.obs||""]);});
+  itens.forEach(x=>{const k=x.app||"Não definida"; if(!g.has(k)) g.set(k,[]); g.get(k).push([x.desc,x.total,x.obs||"",x.orc||""]);});
   return [...g.entries()].map(([k,its])=>[k,its.reduce((s,i)=>s+i[1],0),its]).sort((a,b)=>b[1]-a[1]);
 }
 async function carregar(){
@@ -347,7 +353,7 @@ const state={o:"dmp",e:0};
 
 const cats=k=>DATA[OBRAS[k].sheet];
 const totalDe=k=>cats(k).reduce((s,c)=>s+c[1],0);
-const itensDe=k=>cats(k).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2]})));
+const itensDe=k=>cats(k).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3]})));
 
 /* ---------- seletor de obra ---------- */
 function cabecalho(){
@@ -425,11 +431,12 @@ function panePrev(k){
   const its=itensDe(k); let tot=0, pend=0;
   const rows=OBRAS[k].previos.map((p,i)=>{
     let v=p.v, sub="";
-    if(p.cat){const m=its.filter(x=>x.cat===p.cat); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`;}
-    if(p.itens){const m=its.filter(x=>p.itens.some(r=>r.test(x.d))); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`;}
+    let links="";
+    if(p.cat){const m=its.filter(x=>x.cat===p.cat); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`; links=orcLinks(m.map(x=>x.orc));}
+    if(p.itens){const m=its.filter(x=>p.itens.some(r=>r.test(x.d))); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`; links=orcLinks(m.map(x=>x.orc));}
     if(p.fora) sub="fora da planilha · valor informado";
     if(v==null) pend++; else tot+=v;
-    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(p.t)}</div><div class="d">${esc(p.d)}</div></div>
+    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(p.t)}</div><div class="d">${esc(p.d)}</div>${links?`<div class="pdfs">${links}</div>`:""}</div>
       <div class="v num">${v==null?`<span class="tbd" style="margin:0">A orçar</span>`:brl(v)}<small>${sub}</small></div></div>`;
   }).join("");
   return head(2,"O que precisa acontecer antes da obra começar.")+`<div class="svc">${rows}</div>
@@ -440,7 +447,7 @@ function paneInv(k){
   const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=OBRAS[k].previos.filter(p=>p.fora).reduce((s,p)=>s+p.v,0);
   const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%</small></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
-      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
+      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total · planilha</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
@@ -456,10 +463,22 @@ function paneInv(k){
   </section>`;
 }
 
+/* ---------- orçamentos em PDF (SharePoint da empresa: abre só com login) ---------- */
+const ORC_BASE="https://goiasverde.sharepoint.com/sites/PCMDigital/Documentos%20Compartilhados/Or%C3%A7amentos%20Amplia%C3%A7%C3%B5es/";
+function orcURL(nome){
+  nome=String(nome).trim(); if(/^https?:\/\//i.test(nome)) return nome;
+  return ORC_BASE+nome.replace(/\\/g,"/").split("/").filter(Boolean).map(encodeURIComponent).join("/")+"?web=1";
+}
+function orcLinks(lista){
+  const nomes=[...new Set(lista.flatMap(v=>String(v||"").split(/[;\n]/)).map(s=>s.trim()).filter(Boolean))];
+  return nomes.map(n=>`<a class="pdf" href="${esc(orcURL(n))}" target="_blank" rel="noopener" title="Abrir ${esc(n)} no SharePoint (login da empresa)">📄 Ver orçamento</a>`).join("");
+}
+
 /* ---------- curva de Pareto por etapa ---------- */
 function drawPar(k){
   const svg=document.getElementById("par"); if(!svg) return;
   const rows=cats(k).filter(c=>c[1]>0).map(c=>({n:c[0],v:c[1]})), tot=rows.reduce((s,r)=>s+r.v,0);
+  if(!rows.length){svg.innerHTML="";return;}
   let acc=0; rows.forEach(r=>{acc+=r.v;r.s=r.v/tot;r.cum=acc/tot;r.cl=r.cum<=0.8+1e-9?"A":r.cum<=0.9+1e-9?"B":"C";});
   const n=rows.length, cw=svg.parentElement.clientWidth||900, W=Math.max(cw,n*52+120), H=420;
   const m={l:92,r:50,t:58,b:112}, iw=W-m.l-m.r, ih=H-m.t-m.b, step=iw/n, bw=Math.min(46,step*.62);
