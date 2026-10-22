@@ -428,9 +428,9 @@ const OBRAS={
 const ETAPAS=[["01","Galpão"],["02","Armazenagem"],["03","Serviços preliminares"],["04","Investimento total"]];
 const state={o:"dmp",e:0};
 
-// categoria "Serviço Preliminar" fica só na etapa 03, fora do investimento total e do Pareto
+// categoria "Serviço Preliminar": detalhada na etapa 03 e somada normalmente no investimento total
 const PREL=n=>/servi[cç]os? (preliminar|pr[eé]vio)/i.test(String(n||""));
-const cats=k=>DATA[OBRAS[k].sheet].filter(c=>!PREL(c[0]));
+const cats=k=>DATA[OBRAS[k].sheet];
 const prelDe=k=>DATA[OBRAS[k].sheet].filter(c=>PREL(c[0])).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3],grp:i[4]})));
 const totalPrel=k=>prelDe(k).reduce((s,i)=>s+i.v,0);
 const totalDe=k=>cats(k).reduce((s,c)=>s+c[1],0);
@@ -529,7 +529,7 @@ function panePrev(k){
     const links=orcLinks(g.m.map(x=>x.orc));
     return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}</div>${val}</div>`;
   }).join("");
-  return head(2,"O que precisa acontecer antes da obra começar. Valores à parte do investimento total.")+(rows?`<div class="svc">${rows}</div>
+  return head(2,"O que precisa acontecer antes da obra começar.")+(rows?`<div class="svc">${rows}</div>
     <div class="svtot"><span>Total dos serviços preliminares${pend?` (${pend} sem preço)`:""}</span><b class="num">${brl(tot)}</b></div>`
     :`<p class="note">Nenhum item com a categoria "Serviço Preliminar" na planilha.</p>`);
 }
@@ -542,7 +542,6 @@ function paneInv(k){
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
-      ${extra?`<div class="row"><span>Serviços preliminares (à parte)</span><b>${brl(extra)}</b></div><div class="row"><span>Obra + serviços preliminares</span><b>${brl(tot+extra)}</b></div>`:""}
       <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>
     <div class="cats" data-a style="--i:1">${rows}</div>
   </div>
