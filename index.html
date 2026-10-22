@@ -121,6 +121,14 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .si .d{font-size:13.5px;color:var(--muted);margin-top:3px}
 .si .v{font-family:var(--f-mono);font-size:15.5px;text-align:right;white-space:nowrap}
 .si .v small{display:block;font-size:11.5px;color:var(--muted)}
+.sig{background:var(--panel);border:1px solid var(--rule);border-radius:8px}
+.sig>.si{border:0;background:none;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;grid-template-columns:auto minmax(0,1fr) auto auto}
+.sig>.si:hover{background:color-mix(in srgb,var(--c) 6%,transparent)}
+.sig>.si:focus-visible{outline:2px solid var(--c);outline-offset:-2px}
+.sig .ch{font-size:22px;color:var(--muted);transition:transform .2s}
+.sig[open-cat] .ch{transform:rotate(90deg)}
+.sig[open-cat] .items{display:block}
+.sig .items{padding:4px 20px 12px 70px}
 .svtot{display:flex;justify-content:flex-end;gap:14px;align-items:baseline;font-family:var(--f-mono);color:var(--muted);margin-top:4px}
 .svtot b{font-family:var(--f-display);font-size:30px;color:var(--fg)}
 
@@ -176,6 +184,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
   .cat .tr{grid-column:1 / -1;grid-row:2}
   .si{grid-template-columns:auto minmax(0,1fr)}
   .si .v{grid-column:2;text-align:left}
+  .sig .items{padding:4px 14px 12px}
   .big{position:static}
 }
 @media (prefers-reduced-motion:reduce){.pane.on,.pane [data-a],.cat .tr i{animation:none}}
@@ -387,6 +396,7 @@ function render(){
   if(state.e===0) startGalpao(o);
   if(state.e===3) drawPar(state.o);
   st.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{state.e=+b.dataset.go;render();});
+  st.querySelectorAll(".sig>button").forEach(b=>b.onclick=()=>{const c=b.parentElement;c.toggleAttribute("open-cat");b.setAttribute("aria-expanded",c.hasAttribute("open-cat"));});
   st.querySelectorAll(".cat>button").forEach(b=>b.onclick=()=>{const c=b.parentElement;c.toggleAttribute("open-cat");b.setAttribute("aria-expanded",c.hasAttribute("open-cat"));});
 }
 document.getElementById("steps").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.e=+b.dataset.e;render();});
@@ -445,9 +455,13 @@ function panePrev(k){
   its.filter(x=>!usados.has(x)).forEach(x=>grupos.push({t:x.d,d:x.o||"",m:[x]}));
   const rows=grupos.map((g,i)=>{
     const v=g.m.reduce((s,x)=>s+x.v,0), sem=g.m.filter(x=>!(x.v>0)).length; tot+=v; pend+=sem;
-    const sub=g.m.length>1?`${g.m.length} itens na planilha`:"", links=orcLinks(g.m.map(x=>x.orc));
-    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}</div>
-      <div class="v num">${v>0?brl(v):`<span class="tbd" style="margin:0">A orçar</span>`}<small>${sub}</small></div></div>`;
+    const val=`<div class="v num">${v>0?brl(v):`<span class="tbd" style="margin:0">A orçar</span>`}<small>${g.m.length>1?`${g.m.length} itens na planilha`:""}</small></div>`;
+    if(g.m.length>1){ // grupo com vários itens: clica para abrir a lista
+      const lista=g.m.slice().sort((a,b)=>b.v-a.v).map(x=>`<div class="it ${x.v>0?"":"pend"}"><span>${esc(x.d)}${x.o?`<small>${esc(x.o)}</small>`:""}${x.orc?`<span class="pdfs">${orcLinks([x.orc])}</span>`:""}</span><span class="iv num">${x.v>0?brl(x.v):"sem preço"}</span></div>`).join("");
+      return `<div class="sig" data-a style="--i:${i}"><button class="si" aria-expanded="false"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}</div>${val}<span class="ch">›</span></button><div class="items">${lista}</div></div>`;
+    }
+    const links=orcLinks(g.m.map(x=>x.orc));
+    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}</div>${val}</div>`;
   }).join("");
   return head(2,"O que precisa acontecer antes da obra começar. Valores à parte do investimento total.")+(rows?`<div class="svc">${rows}</div>
     <div class="svtot"><span>Total dos serviços preliminares${pend?` (${pend} sem preço)`:""}</span><b class="num">${brl(tot)}</b></div>`
