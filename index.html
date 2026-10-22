@@ -290,8 +290,9 @@ function parseSheet(rows){
            pu:idx("preco unitario"),total:idx("preco total"),app:idx("aplicacao")};
       // observação: primeira coluna sem título à direita de "Aplicação" (ou com título Observação)
       col.orc=Array.from(r).findIndex(c=>/^orcamentos?( \(pdf\)| pdf)?$/.test(norm(c)));
+      col.grp=Array.from(r).findIndex(c=>/^grupo/.test(norm(c)));
       col.obs=-1;
-      if(col.app>=0) for(let j=col.app+1;j<=col.app+3;j++){ const h=r[j]; if(j!==col.orc && (h==null || /^observac/.test(norm(h)))){ col.obs=j; break; } }
+      if(col.app>=0) for(let j=col.app+1;j<=col.app+3;j++){ const h=r[j]; if(j!==col.orc && j!==col.grp && (h==null || /^observac/.test(norm(h)))){ col.obs=j; break; } }
       break;
     }
   }
@@ -307,7 +308,8 @@ function parseSheet(rows){
       qtd:num(g("qtd")), un:g("un")?String(g("un")).trim():"", pu:num(g("pu")), total:num(g("total"))||0,
       app:g("app")?String(g("app")).trim():"Não definida",
       obs:(ob!=null && typeof ob==="string")?ob.trim():"",
-      orc:g("orc")!=null?String(g("orc")).trim():""
+      orc:g("orc")!=null?String(g("orc")).trim():"",
+      grp:g("grp")!=null?String(g("grp")).trim():""
     });
   }
   return out;
@@ -321,7 +323,7 @@ const ARQ="dados/planilha.xlsx", INTERVALO_MS=60000;
 let DATA={}, SIG="";
 function agrupar(itens){
   const g=new Map();
-  itens.forEach(x=>{const k=x.app||"Não definida"; if(!g.has(k)) g.set(k,[]); g.get(k).push([x.desc,x.total,x.obs||"",x.orc||""]);});
+  itens.forEach(x=>{const k=x.app||"Não definida"; if(!g.has(k)) g.set(k,[]); g.get(k).push([x.desc,x.total,x.obs||"",x.orc||"",x.grp||""]);});
   return [...g.entries()].map(([k,its])=>[k,its.reduce((s,i)=>s+i[1],0),its]).sort((a,b)=>b[1]-a[1]);
 }
 async function carregar(){
@@ -371,7 +373,7 @@ const state={o:"dmp",e:0};
 // categoria "Serviço Preliminar" fica só na etapa 03, fora do investimento total e do Pareto
 const PREL=n=>/servi[cç]os? (preliminar|pr[eé]vio)/i.test(String(n||""));
 const cats=k=>DATA[OBRAS[k].sheet].filter(c=>!PREL(c[0]));
-const prelDe=k=>DATA[OBRAS[k].sheet].filter(c=>PREL(c[0])).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3]})));
+const prelDe=k=>DATA[OBRAS[k].sheet].filter(c=>PREL(c[0])).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3],grp:i[4]})));
 const totalPrel=k=>prelDe(k).reduce((s,i)=>s+i.v,0);
 const totalDe=k=>cats(k).reduce((s,c)=>s+c[1],0);
 const itensDe=k=>cats(k).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3]})));
@@ -451,7 +453,12 @@ function svgDrive(){ // planta: drive-in (ruas de acesso com paletes em profundi
 /* 03 · Serviços preliminares (categoria "Serviço Preliminar" da planilha) */
 function panePrev(k){
   const its=prelDe(k), usados=new Set(); let tot=0, pend=0;
-  const grupos=OBRAS[k].previos.map(p=>{const m=its.filter(x=>!usados.has(x)&&p.itens.some(r=>r.test(x.d))); m.forEach(x=>usados.add(x)); return {t:p.t,d:p.d,m};}).filter(g=>g.m.length);
+  // 1º: coluna "Grupo" da planilha (itens com o mesmo texto viram um cartão)
+  const porCol=new Map();
+  its.filter(x=>x.grp).forEach(x=>{const n=norm(x.grp); if(!porCol.has(n)) porCol.set(n,{t:x.grp,m:[]}); porCol.get(n).m.push(x); usados.add(x);});
+  const grupos=[...porCol.values()].map(g=>({t:g.t,d:(OBRAS[k].previos.find(p=>norm(p.t)===norm(g.t))||{}).d||"",m:g.m}));
+  // 2º: itens sem grupo na planilha caem nas palavras-chave do roteiro
+  grupos.push(...OBRAS[k].previos.map(p=>{const m=its.filter(x=>!usados.has(x)&&p.itens.some(r=>r.test(x.d))); m.forEach(x=>usados.add(x)); return {t:p.t,d:p.d,m};}).filter(g=>g.m.length));
   its.filter(x=>!usados.has(x)).forEach(x=>grupos.push({t:x.d,d:x.o||"",m:[x]}));
   const rows=grupos.map((g,i)=>{
     const v=g.m.reduce((s,x)=>s+x.v,0), sem=g.m.filter(x=>!(x.v>0)).length; tot+=v; pend+=sem;
