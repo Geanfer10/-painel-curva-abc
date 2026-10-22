@@ -395,7 +395,7 @@ function paneArm(k){
   const a=OBRAS[k].arm, it=itensDe(k).filter(i=>i.cat===a.cat), v=it.reduce((s,i)=>s+i.v,0), obs=it.map(i=>i.o).filter(Boolean)[0];
   return head(1,a.tipo)+`<div class="g2">
     <div class="specs">
-      <div class="spec wide" data-a style="--i:0"><div class="k">Orçamento da estrutura</div><div class="v num" style="font-size:clamp(26px,2.4vw,34px)">${v?brl(v):"Em cotação"}</div>${obs?`<div class="d">${esc(obs)}</div>`:""}</div>
+      <div class="spec wide" data-a style="--i:0"><div class="k">Novas posições de palete</div><div class="v num" style="color:var(--muted)">— — —</div><span class="tbd">A definir com o projeto da estrutura</span></div>
     </div>
     <div class="rack" data-a style="--i:2">${a.modelo==="porta"?svgPorta():svgDrive()}</div>
   </div>`;
