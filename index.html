@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Protótipo do novo painel: mesma identidade da apresentação (prancheta de engenharia escura).
-   Estrutura: cabeçalho consolidado → seletor de obra → 4 etapas (Galpão, Armazenagem, Serviços prévios, Investimento). */
+   Estrutura: cabeçalho consolidado → seletor de obra → 4 etapas (Galpão, Armazenagem, Serviços preliminares, Investimento). */
 :root{
   --ground:#d6e3d9; --panel:#ffffff; --panel-2:#d3e0d6; --rule:#b4c8b9;
   --grid:rgba(23,90,50,.07); --grid-2:rgba(23,90,50,.13);
@@ -343,23 +343,27 @@ const OBRAS={
   dmp:{ sheet:"Expansão DMP", nome:"Ampliação DMP", sub:"Novo galpão · porta pallet duplo", cor:"var(--dmp)", hex:"#0b8a42",
     galpao:{ tipo:"Novo galpão em estrutura metálica", L:40, W:50, H:12, area:2000, vaoLivre:"50 m", estrutura:["Estrutura Metálica"] },
     arm:{ tipo:"Estrutura em porta pallet duplo", modelo:"porta", posicoes:null, cat:"Armazenamento" },
-    previos:[
-      {t:"Realocação da estação de abastecimento de gás das empilhadeiras", d:"Liberar a área do novo galpão.", v:15000.00, fora:true},
-      {t:"Locação de empilhadeira retrátil", d:"Para operar o porta pallet duplo.", v:14503.00, fora:true},
+    previos:[ // agrupam itens da categoria "Serviço Preliminar" da planilha; itens que não casam aparecem sozinhos
+      {t:"Realocação da estação de abastecimento de gás das empilhadeiras", d:"Liberar a área do novo galpão.", itens:[/abastecimento de g[aá]s/i]},
+      {t:"SPDA do galpão completo", d:"Sistema de proteção contra descargas atmosféricas.", itens:[/spda/i]},
+      {t:"Locação de empilhadeira retrátil", d:"Para operar o porta pallet duplo.", itens:[/empilhadeira retr/i]},
     ]},
   dpa:{ sheet:"DPA IV", nome:"Depósito Produto Acabado IV", sub:"Novo galpão · drive-in", cor:"var(--dpa)", hex:"#0b8a42",
     galpao:{ tipo:"Novo galpão em estrutura metálica", L:84, W:25, H:12, area:2100, vaoLivre:"25 m", estrutura:["Pré Moldado"] },
     arm:{ tipo:"Estrutura em drive-in", modelo:"drive", posicoes:null, cat:"Armazenamento" },
     previos:[
       {t:"Retirada do reservatório de água que alimenta o alojamento", d:"Novo poço artesiano, bomba, tratamento, reservatório e ligação.", itens:[/po[cç]o artesiano/i,/bomba do po/i,/an[aá]lise/i,/liga[cç][aã]o do po/i,/reservat[oó]rio 5000/i,/estrutura e liga[cç][aã]o do reservat/i]},
-      {t:"Retirada das fossas existentes (nova ETE)", d:"Sistema de tratamento de esgoto, radier, ferragem e alimentação elétrica.", cat:"Tratamento de Esgoto"},
       {t:"Desmontagem da cobertura de enlonamento de caminhões", d:"Mão de obra e locação de munck.", itens:[/enlonamento/i,/munck/i]},
     ]},
 };
-const ETAPAS=[["01","Galpão"],["02","Armazenagem"],["03","Serviços prévios"],["04","Investimento total"]];
+const ETAPAS=[["01","Galpão"],["02","Armazenagem"],["03","Serviços preliminares"],["04","Investimento total"]];
 const state={o:"dmp",e:0};
 
-const cats=k=>DATA[OBRAS[k].sheet];
+// categoria "Serviço Preliminar" fica só na etapa 03, fora do investimento total e do Pareto
+const PREL=n=>/servi[cç]os? (preliminar|pr[eé]vio)/i.test(String(n||""));
+const cats=k=>DATA[OBRAS[k].sheet].filter(c=>!PREL(c[0]));
+const prelDe=k=>DATA[OBRAS[k].sheet].filter(c=>PREL(c[0])).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3]})));
+const totalPrel=k=>prelDe(k).reduce((s,i)=>s+i.v,0);
 const totalDe=k=>cats(k).reduce((s,c)=>s+c[1],0);
 const itensDe=k=>cats(k).flatMap(c=>c[2].map(i=>({cat:c[0],d:i[0],v:i[1],o:i[2],orc:i[3]})));
 
@@ -434,32 +438,31 @@ function svgDrive(){ // planta: drive-in (ruas de acesso com paletes em profundi
   s+=`<text x="${x0}" y="${y0-12}" fill="#5b6b60" font-family="IBM Plex Mono,monospace" font-size="12">ACESSO ↓</text></svg>`;
   return s;
 }
-/* 03 · Serviços prévios */
+/* 03 · Serviços preliminares (categoria "Serviço Preliminar" da planilha) */
 function panePrev(k){
-  const its=itensDe(k); let tot=0, pend=0;
-  const rows=OBRAS[k].previos.map((p,i)=>{
-    let v=p.v, sub="";
-    let links="";
-    if(p.cat){const m=its.filter(x=>x.cat===p.cat); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`; links=orcLinks(m.map(x=>x.orc));}
-    if(p.itens){const m=its.filter(x=>p.itens.some(r=>r.test(x.d))); v=m.reduce((s,x)=>s+x.v,0); sub=`${m.length} itens na planilha`; links=orcLinks(m.map(x=>x.orc));}
-    if(p.fora) sub="fora da planilha · valor informado";
-    if(v==null) pend++; else tot+=v;
-    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(p.t)}</div><div class="d">${esc(p.d)}</div>${links?`<div class="pdfs">${links}</div>`:""}</div>
-      <div class="v num">${v==null?`<span class="tbd" style="margin:0">A orçar</span>`:brl(v)}<small>${sub}</small></div></div>`;
+  const its=prelDe(k), usados=new Set(); let tot=0, pend=0;
+  const grupos=OBRAS[k].previos.map(p=>{const m=its.filter(x=>!usados.has(x)&&p.itens.some(r=>r.test(x.d))); m.forEach(x=>usados.add(x)); return {t:p.t,d:p.d,m};}).filter(g=>g.m.length);
+  its.filter(x=>!usados.has(x)).forEach(x=>grupos.push({t:x.d,d:x.o||"",m:[x]}));
+  const rows=grupos.map((g,i)=>{
+    const v=g.m.reduce((s,x)=>s+x.v,0), sem=g.m.filter(x=>!(x.v>0)).length; tot+=v; pend+=sem;
+    const sub=g.m.length>1?`${g.m.length} itens na planilha`:"", links=orcLinks(g.m.map(x=>x.orc));
+    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}</div>
+      <div class="v num">${v>0?brl(v):`<span class="tbd" style="margin:0">A orçar</span>`}<small>${sub}</small></div></div>`;
   }).join("");
-  return head(2,"O que precisa acontecer antes da obra começar.")+`<div class="svc">${rows}</div>
-    <div class="svtot"><span>Total dos serviços prévios${pend?` (${pend} a orçar)`:""}</span><b class="num">${brl(tot)}</b></div>`;
+  return head(2,"O que precisa acontecer antes da obra começar. Valores à parte do investimento total.")+(rows?`<div class="svc">${rows}</div>
+    <div class="svtot"><span>Total dos serviços preliminares${pend?` (${pend} sem preço)`:""}</span><b class="num">${brl(tot)}</b></div>`
+    :`<p class="note">Nenhum item com a categoria "Serviço Preliminar" na planilha.</p>`);
 }
 /* 04 · Investimento total */
 function paneInv(k){
-  const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=OBRAS[k].previos.filter(p=>p.fora).reduce((s,p)=>s+p.v,0);
+  const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=totalPrel(k);
   const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%</small></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
       <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
-    <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total · planilha</span><span class="v num">${brl(tot)}</span>
+    <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
-      ${extra?`<div class="row"><span>+ fora da planilha (serviços prévios)</span><b>${brl(extra)}</b></div><div class="row"><span>Total com serviços prévios</span><b>${brl(tot+extra)}</b></div>`:""}
+      ${extra?`<div class="row"><span>Serviços preliminares (à parte)</span><b>${brl(extra)}</b></div><div class="row"><span>Obra + serviços preliminares</span><b>${brl(tot+extra)}</b></div>`:""}
       <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>
     <div class="cats" data-a style="--i:1">${rows}</div>
   </div>
