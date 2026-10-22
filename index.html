@@ -330,7 +330,7 @@ const OBRAS={
     galpao:{ tipo:"Novo galpão em estrutura metálica", L:40, W:50, H:12, area:2000, vaoLivre:"50 m", estrutura:["Estrutura Metálica"] },
     arm:{ tipo:"Estrutura em porta pallet duplo", modelo:"porta", posicoes:null, cat:"Armazenamento" },
     previos:[
-      {t:"Realocação da estação de abastecimento de gás das empilhadeiras", d:"Liberar a área do novo galpão.", v:null},
+      {t:"Realocação da estação de abastecimento de gás das empilhadeiras", d:"Liberar a área do novo galpão.", v:15000.00, fora:true},
       {t:"Locação de empilhadeira retrátil", d:"Para operar o porta pallet duplo.", v:14503.00, fora:true},
     ]},
   dpa:{ sheet:"DPA IV", nome:"Depósito Produto Acabado IV", sub:"Novo galpão · drive-in", cor:"var(--dpa)", hex:"#0b8a42",
@@ -444,7 +444,7 @@ function paneInv(k){
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total · planilha</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
-      ${extra?`<div class="row"><span>+ fora da planilha (locação)</span><b>${brl(extra)}</b></div><div class="row"><span>Total com locação</span><b>${brl(tot+extra)}</b></div>`:""}
+      ${extra?`<div class="row"><span>+ fora da planilha (serviços prévios)</span><b>${brl(extra)}</b></div><div class="row"><span>Total com serviços prévios</span><b>${brl(tot+extra)}</b></div>`:""}
       <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>
     <div class="cats" data-a style="--i:1">${rows}</div>
   </div>
