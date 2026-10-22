@@ -111,6 +111,16 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 /* armazenagem */
 .rack{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px}
 .rack svg{display:block;width:100%;height:auto}
+.rack.tem-planta>svg{display:none}
+.planta{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative}
+.planta img{display:block;width:100%;height:auto;border-radius:6px}
+.planta span{position:absolute;right:10px;bottom:10px;font:500 12px var(--f-mono);background:rgba(255,255,255,.92);border:1px solid var(--rule);border-radius:6px;padding:6px 10px;color:var(--fg)}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(10,24,16,.92);display:flex;flex-direction:column}
+.zoom .zbar{display:flex;gap:8px;justify-content:flex-end;align-items:center;padding:10px 14px;color:#d9e6dd;font:500 12.5px var(--f-mono)}
+.zoom .zbar span{margin-right:auto}
+.zoom .zbar button{font:500 13px var(--f-mono);background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:7px 12px;cursor:pointer}
+.zoom .zarea{flex:1;overflow:hidden;cursor:grab;touch-action:none;position:relative}
+.zoom img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-drag:none;background:#fff}
 .tbd{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:5px;padding:4px 8px;margin-top:8px}
 
 /* serviços prévios */
@@ -475,7 +485,8 @@ function paneArm(k){
     <div class="specs">
       <div class="spec wide" data-a style="--i:0"><div class="k">Novas posições de palete</div>${a.posicoes?`<div class="v num">${fmt(a.posicoes,0)}<small>posições</small></div>`:`<div class="v num" style="color:var(--muted)">— — —</div>`}</div>
     </div>
-    <div class="rack" data-a style="--i:2">${a.modelo==="porta"?svgPorta():svgDrive()}</div>
+    <div class="rack" data-a style="--i:2">${a.modelo==="porta"?svgPorta():svgDrive()}
+      <button class="planta" type="button" hidden aria-label="Abrir a planta em tela cheia"><img alt="Planta da armazenagem · ${esc(OBRAS[k].nome)}" src="dados/plantas/${k}.png?v=${PLANTA_V}" onload="this.closest('.rack').classList.add('tem-planta');this.parentElement.hidden=false"><span>🔍 Clique para ampliar</span></button></div>
   </div>`;
 }
 function svgPorta(){ // vista frontal: porta pallet duplo (dupla profundidade)
@@ -541,6 +552,31 @@ function paneInv(k){
     <div class="pbox"><svg id="par" role="img" aria-label="Curva de Pareto das etapas da obra"></svg></div>
     <p class="note">Passe o mouse sobre uma barra para ver o valor em reais.</p>
   </section>`;
+}
+
+/* ---------- planta da armazenagem: tela cheia com zoom (roda do mouse / pinça) e arrastar ---------- */
+const PLANTA_V="1";
+document.addEventListener("click",e=>{const b=e.target.closest(".planta"); if(b) abrirZoom(b.querySelector("img"));});
+function abrirZoom(src){
+  const z=document.createElement("div"); z.className="zoom"; z.setAttribute("role","dialog"); z.setAttribute("aria-label",src.alt);
+  z.innerHTML=`<div class="zbar"><span>${esc(src.alt)} · roda do mouse ou pinça para zoom, arraste para mover</span><button data-z="-">−</button><button data-z="+">+</button><button data-z="0">Ajustar</button><button data-z="x">✕ Fechar</button></div><div class="zarea"><img src="${src.src}" alt=""></div>`;
+  document.body.appendChild(z); document.body.style.overflow="hidden";
+  const area=z.querySelector(".zarea"), img=z.querySelector("img"); let s=1,x=0,y=0,fit=1;
+  const ap=()=>img.style.transform=`translate(${x}px,${y}px) scale(${s})`;
+  const ajustar=()=>{const r=area.getBoundingClientRect(); fit=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight); s=fit; x=(r.width-img.naturalWidth*s)/2; y=(r.height-img.naturalHeight*s)/2; ap();};
+  const zoomEm=(f,cx,cy)=>{const ns=Math.min(fit*12,Math.max(fit*0.8,s*f)); x=cx-(cx-x)*ns/s; y=cy-(cy-y)*ns/s; s=ns; ap();};
+  img.complete?ajustar():img.onload=ajustar;
+  const fechar=()=>{z.remove();document.body.style.overflow="";removeEventListener("keydown",tecla);};
+  const tecla=e=>{if(e.key==="Escape")fechar();}; addEventListener("keydown",tecla);
+  z.querySelector(".zbar").onclick=e=>{const k=e.target.dataset.z,r=area.getBoundingClientRect(); if(k==="x")fechar(); else if(k==="0")ajustar(); else if(k) zoomEm(k==="+"?1.4:1/1.4,r.width/2,r.height/2);};
+  area.addEventListener("wheel",e=>{e.preventDefault();const r=area.getBoundingClientRect();zoomEm(e.deltaY<0?1.2:1/1.2,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+  const pts=new Map(); let dist0=0;
+  area.onpointerdown=e=>{area.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);};
+  area.onpointermove=e=>{if(!pts.has(e.pointerId))return; const [px,py]=pts.get(e.pointerId); pts.set(e.pointerId,[e.clientX,e.clientY]);
+    if(pts.size===1){x+=e.clientX-px;y+=e.clientY-py;ap();}
+    else if(pts.size===2){const [a,b]=[...pts.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]),r=area.getBoundingClientRect(); if(dist0) zoomEm(d/dist0,(a[0]+b[0])/2-r.left,(a[1]+b[1])/2-r.top); dist0=d;}};
+  area.onpointerup=area.onpointercancel=e=>{pts.delete(e.pointerId);dist0=0;};
+  area.ondblclick=e=>{const r=area.getBoundingClientRect();zoomEm(2,e.clientX-r.left,e.clientY-r.top);};
 }
 
 /* ---------- orçamentos em PDF (SharePoint da empresa: abre só com login) ---------- */
