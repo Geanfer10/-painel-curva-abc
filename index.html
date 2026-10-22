@@ -144,7 +144,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 
 /* investimento */
 .inv{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:28px;align-items:start}
-.big{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:6px;position:sticky;top:16px}
+.kpis{display:flex;flex-direction:column;gap:16px;position:sticky;top:16px}
+.big{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:6px}
 .big .v{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,3vw,44px);line-height:1;color:var(--c);white-space:nowrap}
 .big .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted);padding-top:10px;border-top:1px solid var(--rule);margin-top:6px}
 .big .row b{font-family:var(--f-mono);font-weight:500;color:var(--fg)}
@@ -196,6 +197,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
   .si .v{grid-column:2;text-align:left}
   .sig .items{padding:4px 14px 12px}
   .big{position:static}
+  .kpis{position:static}
 }
 @media (prefers-reduced-motion:reduce){.pane.on,.pane [data-a],.cat .tr i{animation:none}}
 </style>
@@ -329,6 +331,23 @@ function assinatura(buf){ // FNV-1a do arquivo, para saber se mudou
   for(let i=0;i<b.length;i++){h^=b[i]; h=Math.imul(h,0x01000193);}
   return b.length+":"+(h>>>0).toString(16);
 }
+/* aba "Prazo de Execução": linha com DMP/DPA vale para a obra; linha sem nome de obra vale para as duas */
+let PRAZO={};
+function lerPrazo(sheets){
+  const p={}, sh=sheets.find(s=>/prazo/.test(norm(s.name))); if(!sh) return p;
+  sh.rows.forEach(r=>{const cel=Array.from(r).filter(c=>c!=null&&String(c).trim()!=="");
+    if(!cel.length) return;
+    const valor=cel.slice(1).find(c=>typeof c==="number"||/\d/.test(String(c)))??(cel.length===1&&/\d/.test(String(cel[0]))?cel[0]:null); if(valor==null) return;
+    const rot=norm(cel.filter(c=>c!==valor).join(" ")), k=/dmp/.test(rot)?"dmp":/dpa|produto acabado/.test(rot)?"dpa":"geral";
+    p[k]=typeof valor==="number"?`${fmt(valor,0)} dias`:String(valor).trim();});
+  return p;
+}
+function kpiPrazo(k){
+  const v=PRAZO[k]||PRAZO.geral; if(!v) return "";
+  const d=numPt(v), meses=d&&/dia/i.test(v)?Math.round(d/30*10)/10:null;
+  return `<aside class="big" data-a style="--i:1"><span class="eyebrow">Prazo de execução</span><span class="v num">${esc(v)}</span>
+    ${meses?`<div class="row"><span>Em meses</span><b>≈ ${fmt(meses,meses%1?1:0)} ${meses===1?"mês":"meses"}</b></div>`:""}</aside>`;
+}
 const ARQ="dados/planilha.xlsx", ARQ_PPT="dados/roteiro.pptx", INTERVALO_MS=60000;
 let SIGP="";
 /* ---------- roteiro em PowerPoint (dados/roteiro.pptx, enviado pelo robô) ----------
@@ -395,7 +414,7 @@ async function carregar(){
       wb.sheets.forEach(s=>{const r=parseSheet(s.rows); if(r&&r.length) d[s.name]=agrupar(r);});
       const faltam=Object.values(OBRAS).filter(o=>!d[o.sheet]).map(o=>o.sheet);
       if(faltam.length) throw new Error("não achei a aba "+faltam.join(" e "));
-      const primeira=!SIG; DATA=d; SIG=sig;
+      const primeira=!SIG; DATA=d; SIG=sig; PRAZO=lerPrazo(wb.sheets);
       st.dataset.mod=wb.modified?fmtDT(wb.modified):"—";
       cabecalho(); render(primeira);
     }
@@ -540,9 +559,9 @@ function paneInv(k){
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
       <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
-    <aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
+    <div class="kpis"><aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
-      <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>
+      <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>${kpiPrazo(k)}</div>
     <div class="cats" data-a style="--i:1">${rows}</div>
   </div>
   <section class="par" data-a style="--i:2">
