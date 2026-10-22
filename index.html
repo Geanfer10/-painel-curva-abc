@@ -519,9 +519,11 @@ function startGalpao(o){
   const st={yaw:-0.7,pitch:0.42,ty:-0.7,tp:0.42,drag:false,w:0,h:0,auto:true};
   const fit=()=>{const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;if(!r.width)return;cv.width=r.width*d;cv.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);st.w=r.width;st.h=r.height;}; fit();
   const span=Math.max(L,W)*1.6, dist=span*2.2;
+  // projeção isométrica (sem perspectiva): lados paralelos ficam do mesmo tamanho
   const P=([x,y,z])=>{const cy=Math.cos(st.yaw),sy=Math.sin(st.yaw),cp=Math.cos(st.pitch),sp=Math.sin(st.pitch);
-    const x1=x*cy-z*sy,z1=x*sy+z*cy,y1=y*cp-z1*sp,z2=y*sp+z1*cp,zc=z2+dist,f=Math.min(st.w,st.h*1.35)*1.2*dist/span/1.6;
-    return [st.w/2+x1*f/zc, st.h*0.64-y1*f/zc];};
+    const x1=x*cy-z*sy,z1=x*sy+z*cy,y1=y*cp-z1*sp;
+    const diag=Math.hypot(L,W)+8, k=Math.min(st.w*1.0/diag, st.h*0.92/(diag*0.6+H+R+8));
+    return [st.w/2+x1*k, st.h*0.56-y1*k];};
   let lx,ly; cv.onpointerdown=e=>{st.drag=true;st.auto=false;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId);};
   cv.onpointermove=e=>{if(!st.drag)return;st.ty+=(e.clientX-lx)*0.008;st.tp=Math.max(0,Math.min(1.25,st.tp+(e.clientY-ly)*0.006));lx=e.clientX;ly=e.clientY;};
   cv.onpointerup=()=>st.drag=false;
