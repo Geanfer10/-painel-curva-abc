@@ -319,7 +319,53 @@ function assinatura(buf){ // FNV-1a do arquivo, para saber se mudou
   for(let i=0;i<b.length;i++){h^=b[i]; h=Math.imul(h,0x01000193);}
   return b.length+":"+(h>>>0).toString(16);
 }
-const ARQ="dados/planilha.xlsx", INTERVALO_MS=60000;
+const ARQ="dados/planilha.xlsx", ARQ_PPT="dados/roteiro.pptx", INTERVALO_MS=60000;
+let SIGP="";
+/* ---------- roteiro em PowerPoint (dados/roteiro.pptx, enviado pelo robô) ----------
+   Cada slide começa com o nome da obra; o 2º parágrafo diz o assunto:
+   "Novo Galpão..." (medidas), "Estrutura em ..." (armazenagem e posições). */
+async function lerPptx(buf){
+  const get=await unzip(buf), xml=s=>new DOMParser().parseFromString(s,"application/xml");
+  const tags=(d,t)=>[...d.getElementsByTagNameNS("*",t)];
+  const rels={}; tags(xml(await get("ppt/_rels/presentation.xml.rels")),"Relationship").forEach(r=>rels[r.getAttribute("Id")]=r.getAttribute("Target"));
+  const ids=tags(xml(await get("ppt/presentation.xml")),"sldId").map(n=>n.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships","id")||n.getAttribute("r:id"));
+  const slides=[];
+  for(const id of ids){ let t=rels[id]||""; t=t.startsWith("/")?t.slice(1):"ppt/"+t.replace(/^\.\//,"");
+    const x=await get(t); if(!x) continue;
+    slides.push(tags(xml(x),"p").map(p=>tags(p,"t").map(n=>n.textContent).join("").trim()).filter(Boolean)); }
+  return slides;
+}
+const numPt=s=>{const m=String(s).match(/(\d[\d.]*(?:,\d+)?)/); return m?Number(m[1].replace(/\./g,"").replace(",",".")):null;};
+const limpa=s=>s.replace(/[:;.]\s*$/,"").trim();
+const OBRAS_PADRAO={}; // valores do código, usados quando o pptx não traz a informação
+function aplicarRoteiro(slides){
+  Object.keys(OBRAS).forEach(k=>{ if(!OBRAS_PADRAO[k]) OBRAS_PADRAO[k]=JSON.parse(JSON.stringify({galpao:OBRAS[k].galpao,arm:OBRAS[k].arm}));
+    OBRAS[k].galpao={...OBRAS_PADRAO[k].galpao}; OBRAS[k].arm={...OBRAS_PADRAO[k].arm}; });
+  slides.forEach(ps=>{
+    if(ps.length<2) return;
+    const t=norm(ps[0]), k=/dmp/.test(t)?"dmp":/produto acabado|dpa/.test(t)?"dpa":null; if(!k) return;
+    const o=OBRAS[k], assunto=norm(ps[1]);
+    if(/galpao/.test(assunto)){
+      o.galpao.tipo=limpa(ps[1]);
+      ps.slice(2).forEach(l=>{const n=norm(l), v=numPt(l); if(v==null) return;
+        if(/^comprimento/.test(n)) o.galpao.L=v;
+        else if(/^largura/.test(n)){ o.galpao.W=v; o.galpao.vaoLivre=/vao livre/.test(n)?`${fmt(v,0)} m`:o.galpao.vaoLivre; }
+        else if(/^pe.?direito/.test(n)) o.galpao.H=v;
+        else if(/^area/.test(n)) o.galpao.area=v; });
+    } else if(/pallet|drive|armazen|posic/.test(assunto) || ps.some(l=>/novas posi/.test(norm(l)))){
+      if(!/posic/.test(assunto)) o.arm.tipo=limpa(ps[1]);
+      o.arm.modelo=/drive/.test(assunto)?"drive":/pallet/.test(assunto)?"porta":o.arm.modelo;
+      const lp=ps.slice(1).find(l=>/posic/.test(norm(l))); o.arm.posicoes=lp?numPt(lp):null;
+    }
+  });
+}
+async function carregarRoteiro(){
+  try{
+    const res=await fetch(ARQ_PPT+"?t="+Date.now(),{cache:"no-store"}); if(!res.ok) return false;
+    const buf=await res.arrayBuffer(), sig=assinatura(buf); if(sig===SIGP) return false;
+    aplicarRoteiro(await lerPptx(buf)); SIGP=sig; return true;
+  }catch(e){ console.warn("roteiro.pptx:",e); return false; }
+}
 let DATA={}, SIG="";
 function agrupar(itens){
   const g=new Map();
@@ -332,6 +378,8 @@ async function carregar(){
     const res=await fetch(ARQ+"?t="+Date.now(),{cache:"no-store"});
     if(!res.ok) throw new Error("não encontrei "+ARQ+" (HTTP "+res.status+")");
     const buf=await res.arrayBuffer(), sig=assinatura(buf);
+    const mudouPpt=await carregarRoteiro();
+    if(mudouPpt && sig===SIG){ render(); }
     if(sig!==SIG){
       const wb=await lerXlsx(buf), d={};
       wb.sheets.forEach(s=>{const r=parseSheet(s.rows); if(r&&r.length) d[s.name]=agrupar(r);});
@@ -425,7 +473,7 @@ function paneArm(k){
   const a=OBRAS[k].arm, it=itensDe(k).filter(i=>i.cat===a.cat), v=it.reduce((s,i)=>s+i.v,0), obs=it.map(i=>i.o).filter(Boolean)[0];
   return head(1,a.tipo)+`<div class="g2">
     <div class="specs">
-      <div class="spec wide" data-a style="--i:0"><div class="k">Novas posições de palete</div><div class="v num" style="color:var(--muted)">— — —</div><span class="tbd">A definir com o projeto da estrutura</span></div>
+      <div class="spec wide" data-a style="--i:0"><div class="k">Novas posições de palete</div>${a.posicoes?`<div class="v num">${fmt(a.posicoes,0)}<small>posições</small></div>`:`<div class="v num" style="color:var(--muted)">— — —</div><span class="tbd">A definir com o projeto da estrutura</span>`}</div>
     </div>
     <div class="rack" data-a style="--i:2">${a.modelo==="porta"?svgPorta():svgDrive()}</div>
   </div>`;
