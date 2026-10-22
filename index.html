@@ -456,7 +456,7 @@ function panePrev(k){
   // 1º: coluna "Grupo" da planilha (itens com o mesmo texto viram um cartão)
   const porCol=new Map();
   its.filter(x=>x.grp).forEach(x=>{const n=norm(x.grp); if(!porCol.has(n)) porCol.set(n,{t:x.grp,m:[]}); porCol.get(n).m.push(x); usados.add(x);});
-  const grupos=[...porCol.values()].map(g=>({t:g.t,d:(OBRAS[k].previos.find(p=>norm(p.t)===norm(g.t))||{}).d||"",m:g.m}));
+  const grupos=[...porCol.values()].map(g=>({t:g.t,d:(OBRAS[k].previos.find(p=>norm(p.t)===norm(g.t)||g.m.some(x=>p.itens.some(r=>r.test(x.d))))||{}).d||"",m:g.m}));
   // 2º: itens sem grupo na planilha caem nas palavras-chave do roteiro
   grupos.push(...OBRAS[k].previos.map(p=>{const m=its.filter(x=>!usados.has(x)&&p.itens.some(r=>r.test(x.d))); m.forEach(x=>usados.add(x)); return {t:p.t,d:p.d,m};}).filter(g=>g.m.length));
   its.filter(x=>!usados.has(x)).forEach(x=>grupos.push({t:x.d,d:x.o||"",m:[x]}));
