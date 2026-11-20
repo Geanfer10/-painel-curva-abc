@@ -431,18 +431,22 @@ const temOrc=x=>!!x&&((x.orcamentos&&x.orcamentos.length)||x.link);
 function seloEtapa(k,x){
   if(!MON) return "";
   const n=x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length, t=x[2].length, e=infoE(k,x[0]);
-  const st=n===t&&t?`<span class="st ok">Contrato assinado</span>`:n?`<span class="st parc">${n} de ${t} contratados</span>`:`<span class="st">${esc((e&&e.status)||"A negociar")}</span>`;
+  const st=n===t&&t&&e&&assinado(e)?`<span class="st ok"${estiloSt(e)}>${esc(e.status)}</span>`:n===t&&t?`<span class="st ok">Contrato assinado</span>`:n?`<span class="st parc">${n} de ${t} contratados</span>`:`<span class="st"${estiloSt(e)}>${esc((e&&e.status)||"A negociar")}</span>`;
   const orc=temOrc(e)?`<span class="orc-chip" title="Etapa com orçamento anexado">📄 orçamento</span>`:"";
   return `<span class="cn-s">${st}${orc}</span>`;
 }
 function linhaEtapa(k,etapa){ // orçamento da etapa: aparece uma vez, no topo da lista de itens
   const e=infoE(k,etapa); if(!temOrc(e)) return "";
-  return `<div class="orc-et"><span>Orçamento da etapa</span><span class="st ${assinado(e)?"ok":""}">${esc(e.status)}</span>${botoesOrc(e)}</div>`;
+  return `<div class="orc-et"><span>Orçamento da etapa</span><span class="st ${assinado(e)?"ok":""}"${estiloSt(e)}>${esc(e.status)}</span>${botoesOrc(e)}</div>`;
 }
-const assinado=x=>!!x&&/assinad|contratad/i.test(x.status||"");
+// conta como contratado: "Contrato assinado" e qualquer status que venha depois dele (lista abaixo)
+const STATUS_CONTRATADO=/assinad|contratad|em execu|execut|conclu|finaliz|entreg/i;
+const assinado=x=>!!x&&STATUS_CONTRATADO.test(x.status||"");
+// selo com a mesma cor do status no Monday
+const estiloSt=x=>x&&x.cor&&/^#[0-9a-f]{6}$/i.test(x.cor)?` style="border-color:${x.cor};background:${x.cor}1f;color:color-mix(in srgb,${x.cor} 55%,#000)"`:"";
 function tagM(x){
   if(!x) return "";
-  const st=`<span class="st ${assinado(x)?"ok":""}">${esc(x.status||"A negociar")}</span>`;
+  const st=`<span class="st ${assinado(x)?"ok":""}"${estiloSt(x)}>${esc(x.status||"A negociar")}</span>`;
   return `<span class="mon">${st}${botoesOrc(x)}</span>`;
 }
 function contratado(k){ // soma dos valores da planilha cujos itens estão com contrato assinado

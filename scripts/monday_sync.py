@@ -19,7 +19,7 @@ def api(q, v=None):
     if r.get("errors"): sys.exit("Erro do Monday: %s" % r["errors"])
     return r["data"]
 
-def cols(ids): return "column_values(ids: [%s]) { id text value }" % ",".join('"%s"' % i for i in ids.values())
+def cols(ids): return "column_values(ids: [%s]) { id text value ... on StatusValue { label_style { color } } }" % ",".join('"%s"' % i for i in ids.values())
 def arqs(C): return 'assets(assets_source: columns, column_ids: ["%s"]) { name url }' % C["arq"]
 CAMPOS = "items { id name group { id title } %s %s subitems { id name %s %s } }" % (cols(P), arqs(P), cols(S), arqs(S))
 pg = api("query { boards(ids: %d) { items_page(limit: 200) { cursor %s } } }" % (BOARD, CAMPOS))["boards"][0]["items_page"]
@@ -35,20 +35,21 @@ def ler(item, C):
         except Exception: return {}
     # link "protected_static": baixa o arquivo direto, mas só para quem está logado no Monday
     orc = [{"nome": a["name"], "url": a["url"]} for a in item.get("assets") or [] if a.get("url")]
-    return {"status": ((cv.get(C["status"]) or {}).get("text") or "").strip(),
+    st = cv.get(C["status"]) or {}
+    return {"status": (st.get("text") or "").strip(), "cor": ((st.get("label_style") or {}).get("color") or "") if st.get("text") else "",
             "arquivos": len(orc), "orcamentos": orc, "link": js(C["link"]).get("url", "") or ""}
 
 saida, etapas = [], []
 for it in itens:
     obra = GRUPOS.get(it["group"]["id"]) or ("dmp" if "dmp" in it["group"]["title"].lower() else "dpa")
     pai, url_pai = ler(it, P), f"{CONTA}/boards/{BOARD}/pulses/{it['id']}"
-    etapas.append({"obra": obra, "etapa": it["name"], "status": pai["status"] or "A negociar",
+    etapas.append({"obra": obra, "etapa": it["name"], "status": pai["status"] or "A negociar", "cor": pai["cor"],
                    "arquivos": pai["arquivos"], "orcamentos": pai["orcamentos"], "link": pai["link"], "url": url_pai})
     for sub in it.get("subitems") or []:
         f = ler(sub, S)
         # orçamento da etapa aparece uma vez só, na etapa; aqui ficam só os orçamentos próprios do item
         saida.append({"obra": obra, "etapa": it["name"], "nome": sub["name"],
-                      "status": f["status"] or pai["status"] or "A negociar",
+                      "status": f["status"] or pai["status"] or "A negociar", "cor": f["cor"] if f["status"] else pai["cor"],
                       "arquivos": f["arquivos"], "orcamentos": f["orcamentos"], "link": f["link"],
                       "url": f"{CONTA}/boards/{SUBBOARD}/pulses/{sub['id']}"})
 saida.sort(key=lambda x: (x["obra"], x["etapa"], x["nome"])); etapas.sort(key=lambda x: (x["obra"], x["etapa"]))
