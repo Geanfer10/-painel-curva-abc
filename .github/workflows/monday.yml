@@ -1,0 +1,28 @@
+name: Status do Monday
+on:
+  schedule:
+    - cron: "*/10 10-23 * * 1-6"   # a cada 10 min, das 7h às 20h (Brasília), seg a sáb
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: monday
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buscar status e orçamentos no Monday
+        env:
+          MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
+        run: python3 scripts/monday_sync.py
+      - name: Enviar se mudou
+        run: |
+          git config user.name "robo-monday"
+          git config user.email "robo-monday@users.noreply.github.com"
+          git add dados/monday.json
+          if git diff --cached --quiet; then echo "Nada a enviar."; exit 0; fi
+          git commit -m "Atualiza status do Monday"
+          for i in 1 2 3; do git pull --rebase -q && git push && exit 0; sleep 5; done
+          exit 1

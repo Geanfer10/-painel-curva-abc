@@ -170,6 +170,15 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .it small{display:block;color:var(--muted);font-size:12px}
 .note{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
 .pdfs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+/* status e orçamento vindos do Monday */
+.mon{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.st{display:inline-flex;align-items:center;gap:5px;font:500 11.5px var(--f-mono);border-radius:999px;padding:3px 9px;border:1px solid #e7c58b;background:#fdf3e1;color:#8a5a0c;white-space:nowrap}
+.st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st.ok{border-color:#9fd2b0;background:#e6f4ea;color:#11683a}
+.cn .ok-n{color:#11683a}
+.contr{margin-top:4px}
+.contr .barc{height:8px;border-radius:4px;background:#e3ece6;overflow:hidden;margin-top:8px}
+.contr .barc i{display:block;height:100%;background:#1f9d55;border-radius:4px}
 .pdf{display:inline-flex;align-items:center;gap:4px;font:500 12px var(--f-mono);color:var(--c);text-decoration:none;border:1px solid var(--rule);background:var(--panel);border-radius:5px;padding:3px 8px}
 .pdf:hover{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,var(--panel))}
 .pdf:focus-visible{outline:2px solid var(--c);outline-offset:2px}
@@ -342,11 +351,46 @@ function lerPrazo(sheets){
     p[k]=typeof valor==="number"?`${fmt(valor,0)} dias`:String(valor).trim();});
   return p;
 }
+function kpiContrato(k,tot){
+  if(!MON) return "";
+  const c=contratado(k), p=tot?c.v/tot*100:0;
+  return `<aside class="big contr" data-a style="--i:1"><span class="eyebrow">Contratado</span><span class="v num" style="color:#11683a">${brl(c.v)}</span>
+    <div class="barc" role="img" aria-label="${fmt(p,1)}% do investimento contratado"><i style="width:${Math.min(100,p)}%"></i></div>
+    <div class="row"><span>Do investimento total</span><b>${fmt(p,1)}%</b></div>
+    <div class="row"><span>Itens com contrato assinado</span><b>${c.n} de ${c.tot}</b></div>
+    <div class="row"><span>A negociar</span><b>${brl(tot-c.v)}</b></div>
+    ${MON.board?`<div class="row"><span>Board no Monday${MON.atualizado?` · ${esc(MON.atualizado)}`:""}</span><b><a class="pdf" href="${esc(MON.board)}" target="_blank" rel="noopener">Abrir ↗</a></b></div>`:""}</aside>`;
+}
 function kpiPrazo(k){
   const v=PRAZO[k]||PRAZO.geral; if(!v) return "";
   const d=numPt(v), meses=d&&/dia/i.test(v)?Math.round(d/30*10)/10:null;
   return `<aside class="big" data-a style="--i:1"><span class="eyebrow">Prazo de execução</span><span class="v num">${esc(v)}</span>
     ${meses?`<div class="row"><span>Em meses</span><b>≈ ${fmt(meses,meses%1?1:0)} ${meses===1?"mês":"meses"}</b></div>`:""}</aside>`;
+}
+/* ---------- Monday: status (Contrato assinado / A negociar) e orçamento de cada item ----------
+   dados/monday.json é gravado pelo robô do GitHub Actions (scripts/monday_sync.py).
+   O item é achado pela obra + etapa (coluna "Aplicação") + descrição. */
+let MON=null, SIGM="";
+const chaveM=(k,etapa,nome)=>k+"|"+norm(etapa)+"|"+norm(nome);
+async function carregarMonday(){
+  try{
+    const r=await fetch("dados/monday.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return false;
+    const txt=await r.text(); if(txt===SIGM) return false;
+    const j=JSON.parse(txt), m=new Map(); (j.itens||[]).forEach(x=>m.set(chaveM(x.obra,x.etapa,x.nome),x));
+    MON={map:m,board:j.board,atualizado:j.atualizado}; SIGM=txt; return true;
+  }catch(e){ console.warn("monday.json:",e); return false; }
+}
+const infoM=(k,etapa,nome)=>MON?MON.map.get(chaveM(k,etapa,nome)):null;
+const assinado=x=>!!x&&/assinad|contratad/i.test(x.status||"");
+function tagM(x){
+  if(!x) return "";
+  const st=`<span class="st ${assinado(x)?"ok":""}">${esc(x.status||"A negociar")}</span>`;
+  const href=x.link||(x.arquivos>0?x.url:"");
+  const orc=href?`<a class="pdf" href="${esc(href)}" target="_blank" rel="noopener">📄 Orçamento${x.arquivos>1?` (${x.arquivos})`:""}</a>`:"";
+  return `<span class="mon">${st}${orc}</span>`;
+}
+function contratado(k){ // soma dos valores da planilha cujos itens estão com contrato assinado
+  let v=0,n=0,tot=0; cats(k).forEach(c=>c[2].forEach(i=>{tot++; if(assinado(infoM(k,c[0],i[0]))){v+=i[1];n++;}})); return {v,n,tot};
 }
 const ARQ="dados/planilha.xlsx", ARQ_PPT="dados/roteiro.pptx", INTERVALO_MS=60000;
 let SIGP="";
@@ -407,8 +451,8 @@ async function carregar(){
     const res=await fetch(ARQ+"?t="+Date.now(),{cache:"no-store"});
     if(!res.ok) throw new Error("não encontrei "+ARQ+" (HTTP "+res.status+")");
     const buf=await res.arrayBuffer(), sig=assinatura(buf);
-    const mudouPpt=await carregarRoteiro();
-    if(mudouPpt && sig===SIG){ render(); }
+    const mudouPpt=await carregarRoteiro(), mudouMon=await carregarMonday();
+    if((mudouPpt||mudouMon) && sig===SIG){ render(); }
     if(sig!==SIG){
       const wb=await lerXlsx(buf), d={};
       wb.sheets.forEach(s=>{const r=parseSheet(s.rows); if(r&&r.length) d[s.name]=agrupar(r);});
@@ -542,11 +586,11 @@ function panePrev(k){
     const v=g.m.reduce((s,x)=>s+x.v,0), sem=g.m.filter(x=>!(x.v>0)).length; tot+=v; pend+=sem;
     const val=`<div class="v num">${v>0?brl(v):`<span class="tbd" style="margin:0">A orçar</span>`}<small>${g.m.length>1?`${g.m.length} itens na planilha`:""}</small></div>`;
     if(g.m.length>1){ // grupo com vários itens: clica para abrir a lista
-      const lista=g.m.slice().sort((a,b)=>b.v-a.v).map(x=>`<div class="it ${x.v>0?"":"pend"}"><span>${esc(x.d)}${x.o?`<small>${esc(x.o)}</small>`:""}${x.orc?`<span class="pdfs">${orcLinks([x.orc])}</span>`:""}</span><span class="iv num">${x.v>0?brl(x.v):"sem preço"}</span></div>`).join("");
+      const lista=g.m.slice().sort((a,b)=>b.v-a.v).map(x=>`<div class="it ${x.v>0?"":"pend"}"><span>${esc(x.d)}${x.o?`<small>${esc(x.o)}</small>`:""}${x.orc?`<span class="pdfs">${orcLinks([x.orc])}</span>`:""}${tagM(infoM(k,x.cat,x.d))}</span><span class="iv num">${x.v>0?brl(x.v):"sem preço"}</span></div>`).join("");
       return `<div class="sig" data-a style="--i:${i}"><button class="si" aria-expanded="false"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}</div>${val}<span class="ch">›</span></button><div class="items">${lista}</div></div>`;
     }
     const links=orcLinks(g.m.map(x=>x.orc));
-    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}</div>${val}</div>`;
+    return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}${tagM(infoM(k,g.m[0].cat,g.m[0].d))}</div>${val}</div>`;
   }).join("");
   return head(2,"O que precisa acontecer antes da obra começar.")+(rows?`<div class="svc">${rows}</div>
     <div class="svtot"><span>Total dos serviços preliminares${pend?` (${pend} sem preço)`:""}</span><b class="num">${brl(tot)}</b></div>`
@@ -555,13 +599,13 @@ function panePrev(k){
 /* 04 · Investimento total */
 function paneInv(k){
   const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=totalPrel(k);
-  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%</small></span>
+  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}</small></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
-      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
+      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <div class="kpis"><aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>
-      <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>${kpiPrazo(k)}</div>
+      <div class="row"><span>Itens sem preço</span><b>${pend.length} de ${all.length}</b></div></aside>${kpiContrato(k,tot)}${kpiPrazo(k)}</div>
     <div class="cats" data-a style="--i:1">${rows}</div>
   </div>
   <section class="par" data-a style="--i:2">

@@ -1,0 +1,1374 @@
+{
+ "board": "https://messigean18s-team.monday.com/boards/18440874858",
+ "itens": [
+  {
+   "obra": "dmp",
+   "nome": "Estrutura Porta Pallet",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Frete",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Montagem da estrutura",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Projeto de combate ao incêndio - material e execução",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Sistema de Alarme de incêndio",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Cap esgoto PVC 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Joelho esgoto PVC 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Joelho esgoto PVC 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Luva PVC esgoto 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Te esgoto PVC 250mm Redução para 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tubo esgoto PVC branco 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tubo esgoto PVC branco 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Fechamento das treliças do galpão em chapa galvanizada",
+   "etapa": "Estrutura Metálica",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Galpão em estrutura metálica 50 x 40 x 12m - Fechamentos inclusos M.O",
+   "etapa": "Estrutura Metálica",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Telha Trapeizodal TP40 3000mm #0,50mm",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Fechamento em Alvenaria - Mão de Obra",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Manta Asfáltica PP Poliéster Tipo II Classe B 4mm 1x10m Impermanta",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Rufo de acabamento 140 x 140 x 20mm #20",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Rufo de encontro dos galpões",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Concreto FCK 30 Brita 0 Slump 10±2 cálices e blocos",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Concreto FCK 30 Brita 0 Slump 20±2 fundação profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Execução da fundação profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Ferragem para fundação Profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Ferragem para fundação rasa",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Madeirite 2,20 x 1,10m 14mm plastificado",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Projeto Fundação profunda e cálices",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "SPT para dimensionamento de fundação",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Cabo PP 4 x 2.5mm²",
+   "etapa": "Iluminação Galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Luminária Highbay redonda",
+   "etapa": "Iluminação Galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Mão de obra para instalação da iluminação",
+   "etapa": "Iluminação Galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tinta PU Verde Folha",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tinta Piso Concreto",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tinta epoxi amarela",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tinta epoxi preta",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Diária bomba de concreto - valor por metro bombeado",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Manta geotextil bidim",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Mão de obra para concretagem do piso",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Treliça TR8 CA-60 12m",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Locação de empilhadeira retrátil",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Realocação da estação de abastecimento de gás das empilhadeiras",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "SPDA do galpão completo",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Cumeeira natural 30x30",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Frete do material de telhado",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Parafuso autobrocante 12 x 5\" 100uni.",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Parafuso autobrocante 12 x 7/8 100uni.",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Telha forro metalico natural x branco  0.43 eps 50mm f1 retardante a chamas",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Telha forro metalico natural x branco 0.43 eps 50mm f1 retardante a chamas",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Serviço de terraplanagem da área",
+   "etapa": "Terraplanagem",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "nome": "Topografia do local para locação dos pontos de concretagem dos pilares",
+   "etapa": "Topografia",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Estrutura drive-in",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Frete",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Montagem da estrutura",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Projeto de combate ao incêndio - material, execução e aprovação",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Sistema de alarme de incêndio",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo para instalação das Niveladoras",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo para instalação das portas automáticas",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Caixa Parafuso autobrocante 12 x 3/4\" 100un",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Diária bomba de concreto - valor por metro bombeado",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Frete das rampas niveladoras",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Locação de plataforma para montagem das coberturas",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Manta Asfáltica PP Poliéster Tipo II Classe B 4mm 1x10m Impermanta",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para concretagem do piso das docas de carregamento (1075m²)",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para fechamento em alvenaria e telhas na fachada do galpão DPA IV",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para fechamento em alvenaria na parte interna do galpão blocado 1,20m",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para montagem e cobertura da frente das docas de carregamento",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Perfil A/C 127x50 #3mm - Treliças",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Perfil Enrijecido A/C 150x50x20mm #2mm",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Perfil Enrijecido A/C 150x50x20mm #2mm - Treliças",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Portas automáticas para as docas - Porta Flex. Fast Roll Dock 2,4m (L) x 3m (A)",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Rampas Niveladoras para a expedição",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Rufo de encontro dos galpões",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Serviço de instalação das portas automáticas",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha TP40 0.50mm comp 4000mm util 980mm galvalume",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha Trapezoidal TP40 6600mm",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Treliça TR8 CA-60 12m",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cap esgoto PVC 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Joelho esgoto PVC 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Joelho esgoto PVC 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Luva PVC esgoto 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para montagem da rede de drenagem pluvial",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Te esgoto PVC 250mm Redução para 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Te esgoto PVC 250mm Redução para 150mm (Meio dos galpões)",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tubo esgoto PVC branco 150mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tubo esgoto PVC branco 250mm",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tubo esgoto PVC branco 250mm (Meio dos galpões)",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Perfil Enrijecido A/C 150x50x20mm",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha Trapeizodal TP40 3000mm #0,50mm",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Caixa Parafuso autobrocante 12 x 3/4\" 100un",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Frete para telhas",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para Fechamento em Alvenaria",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Perfil Enrijecido A/C 150x50x20mm",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Rufo de acabamento galvanizado 140 x 140 x 20mm #20",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Rufo de encontro dos galpões",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Arrasamento das estacas, locação dos blocos e concretagem dos cálices",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto FCK 30 Brita 0 Slump 24±2 fundação profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto para fundação rasa",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Execução da fundação profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Ferragem para fundação Profunda",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Ferragem para fundação rasa",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Madeirite para forma da fundação",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Projeto fundação profunda e cálices",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Sondagem SPT após realização do aterro",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo PP 4 x 2.5mm²",
+   "etapa": "Iluminação galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Luminária Highbay redonda",
+   "etapa": "Iluminação galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para instalação da iluminação",
+   "etapa": "Iluminação galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tinta Piso Concreto",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tinta epoxi amarela",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tinta epoxi preta",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Diária bomba de concreto - valor por metro bombeado",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Manta geotextil bidim",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para concretagem do piso do galpão 2100m²",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Treliça TR8 CA-60 12m",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Frete para entrega do Meio fio",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Meio Fio Padrão Novacap 30x15/12",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para concretagem do piso e instalação do meio-fio",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Calha metálica para o pré moldado (de acordo com o projeto)",
+   "etapa": "Pré Moldado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Estrutura em pré moldado",
+   "etapa": "Pré Moldado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Sala de coordenação e banheiro de funcionários",
+   "etapa": "Sala Coordenação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Sala provisória para apontamento e coordenação",
+   "etapa": "Sala Coordenação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Análise + Sistema de tratamento para consumo final do poço artesiano",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Bomba do poço artesiano",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo PP 120mm² Preto",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo PP 4x10mm² Preto (ligação do poço artesiano)",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cabo PP 50mm² Preto",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Concreto para o radier do sistema de tratamento de esgoto do banheiro",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Eletrocalha 100 x 100mm com virola galvanizada",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Ferragem para o Sistema de tratamento de esgoto do banheiro",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Locação do munck para desmontagem do galpão",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Material para estrutura e ligação do reservatório",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Mão de obra para desmontagem da cobertura de enlonamento de caminhões e lateral do blocado",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Painel 1000x600x300mm A/C",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Poço Artesiano para alimentação do alojamento",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Reservatório 5000 litros para o alojamento",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Sistema de tratamento para esgoto do banheiro",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Cumeeiras tp40 0.50mm largura util 980mm galvalume",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Parafuso de costura telha/telha",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Parafuso de fixação telha/terça",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telha tp40 0.50mm comp 7300mm largura util 980mm galvalume",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Telhas tp40 0.50mm comp 5600mm largura util 980mm galvalume",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "nome": "Serviço de terraplanagem da área",
+   "etapa": "Terraplanagem",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  }
+ ],
+ "atualizado": "20/11/2026 10:30"
+}
