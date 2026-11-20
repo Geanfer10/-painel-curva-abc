@@ -6,6 +6,12 @@
    "etapa": "Armazenamento",
    "status": "A negociar",
    "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Estrutura Drive In e Porta Pallet.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3401739937/Estrutura%20Drive%20In%20e%20Porta%20Pallet.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
   },
@@ -14,6 +20,7 @@
    "etapa": "Combate ao Incêndio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252758"
   },
@@ -22,6 +29,7 @@
    "etapa": "Drenagem Pluvial",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
   },
@@ -30,6 +38,12 @@
    "etapa": "Estrutura Metálica",
    "status": "A negociar",
    "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Estrutura Metálica .pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3401738943/Estrutura%20Met%C3%A1lica%20.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
   },
@@ -38,6 +52,7 @@
    "etapa": "Fechamento Frontal",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252775"
   },
@@ -46,6 +61,7 @@
    "etapa": "Fechamento Lateral",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
   },
@@ -54,6 +70,7 @@
    "etapa": "Fundação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
   },
@@ -62,6 +79,7 @@
    "etapa": "Iluminação Galpão",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252773"
   },
@@ -70,6 +88,7 @@
    "etapa": "Pintura",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252776"
   },
@@ -78,6 +97,7 @@
    "etapa": "Piso",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
   },
@@ -86,6 +106,7 @@
    "etapa": "Serviço Preliminar",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252756"
   },
@@ -94,6 +115,7 @@
    "etapa": "Telhado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
   },
@@ -102,6 +124,7 @@
    "etapa": "Terraplanagem",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252770"
   },
@@ -110,6 +133,7 @@
    "etapa": "Topografia",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252777"
   },
@@ -118,6 +142,7 @@
    "etapa": "Armazenamento",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252778"
   },
@@ -126,6 +151,7 @@
    "etapa": "Combate ao Incêndio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252818"
   },
@@ -134,6 +160,7 @@
    "etapa": "Docas de Carregamento",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
   },
@@ -142,6 +169,7 @@
    "etapa": "Drenagem Pluvial",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
   },
@@ -150,6 +178,7 @@
    "etapa": "Fechamento Frontal",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252826"
   },
@@ -158,6 +187,7 @@
    "etapa": "Fechamento Lateral",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
   },
@@ -166,6 +196,7 @@
    "etapa": "Fundação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
   },
@@ -174,6 +205,7 @@
    "etapa": "Iluminação galpão",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252825"
   },
@@ -182,6 +214,7 @@
    "etapa": "Pintura",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252828"
   },
@@ -190,6 +223,7 @@
    "etapa": "Piso Galpão DPA IV",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
   },
@@ -198,6 +232,7 @@
    "etapa": "Piso Pátio de Manobra",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
   },
@@ -206,6 +241,7 @@
    "etapa": "Pré Moldado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252813"
   },
@@ -214,6 +250,7 @@
    "etapa": "Sala Coordenação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252827"
   },
@@ -222,6 +259,7 @@
    "etapa": "Serviço Preliminar",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
   },
@@ -230,6 +268,7 @@
    "etapa": "Telhado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
   },
@@ -238,6 +277,7 @@
    "etapa": "Terraplanagem",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252816"
   }
@@ -248,27 +288,30 @@
    "etapa": "Armazenamento",
    "nome": "Estrutura Porta Pallet",
    "status": "A negociar",
-   "arquivos": 1,
+   "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211856"
   },
   {
    "obra": "dmp",
    "etapa": "Armazenamento",
    "nome": "Frete",
    "status": "A negociar",
-   "arquivos": 1,
+   "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211859"
   },
   {
    "obra": "dmp",
    "etapa": "Armazenamento",
    "nome": "Montagem da estrutura",
    "status": "A negociar",
-   "arquivos": 1,
+   "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211861"
   },
   {
    "obra": "dmp",
@@ -276,8 +319,9 @@
    "nome": "Projeto de combate ao incêndio - material e execução",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252758"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211867"
   },
   {
    "obra": "dmp",
@@ -285,8 +329,9 @@
    "nome": "Sistema de Alarme de incêndio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252758"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211868"
   },
   {
    "obra": "dmp",
@@ -294,8 +339,9 @@
    "nome": "Cap esgoto PVC 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602230759"
   },
   {
    "obra": "dmp",
@@ -303,8 +349,9 @@
    "nome": "Joelho esgoto PVC 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602224658"
   },
   {
    "obra": "dmp",
@@ -312,8 +359,9 @@
    "nome": "Joelho esgoto PVC 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602230756"
   },
   {
    "obra": "dmp",
@@ -321,8 +369,9 @@
    "nome": "Luva PVC esgoto 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602230747"
   },
   {
    "obra": "dmp",
@@ -330,8 +379,9 @@
    "nome": "Te esgoto PVC 250mm Redução para 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229328"
   },
   {
    "obra": "dmp",
@@ -339,8 +389,9 @@
    "nome": "Tubo esgoto PVC branco 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602224657"
   },
   {
    "obra": "dmp",
@@ -348,26 +399,29 @@
    "nome": "Tubo esgoto PVC branco 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252774"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229318"
   },
   {
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
    "nome": "Fechamento das treliças do galpão em chapa galvanizada",
    "status": "A negociar",
-   "arquivos": 1,
+   "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211854"
   },
   {
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
    "nome": "Galpão em estrutura metálica 50 x 40 x 12m - Fechamentos inclusos M.O",
    "status": "A negociar",
-   "arquivos": 1,
+   "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602253082"
   },
   {
    "obra": "dmp",
@@ -375,8 +429,9 @@
    "nome": "Telha Trapeizodal TP40 3000mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252775"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602225509"
   },
   {
    "obra": "dmp",
@@ -384,8 +439,9 @@
    "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252775"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602230769"
   },
   {
    "obra": "dmp",
@@ -393,8 +449,9 @@
    "nome": "Fechamento em Alvenaria - Mão de Obra",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229300"
   },
   {
    "obra": "dmp",
@@ -402,8 +459,9 @@
    "nome": "Manta Asfáltica PP Poliéster Tipo II Classe B 4mm 1x10m Impermanta",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229311"
   },
   {
    "obra": "dmp",
@@ -411,8 +469,9 @@
    "nome": "Rufo de acabamento 140 x 140 x 20mm #20",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229310"
   },
   {
    "obra": "dmp",
@@ -420,8 +479,9 @@
    "nome": "Rufo de encontro dos galpões",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229313"
   },
   {
    "obra": "dmp",
@@ -429,8 +489,9 @@
    "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252772"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229299"
   },
   {
    "obra": "dmp",
@@ -438,8 +499,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 10±2 cálices e blocos",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229292"
   },
   {
    "obra": "dmp",
@@ -447,8 +509,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 20±2 fundação profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211891"
   },
   {
    "obra": "dmp",
@@ -456,8 +519,9 @@
    "nome": "Execução da fundação profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211890"
   },
   {
    "obra": "dmp",
@@ -465,8 +529,9 @@
    "nome": "Ferragem para fundação Profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229294"
   },
   {
    "obra": "dmp",
@@ -474,8 +539,9 @@
    "nome": "Ferragem para fundação rasa",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229293"
   },
   {
    "obra": "dmp",
@@ -483,8 +549,9 @@
    "nome": "Madeirite 2,20 x 1,10m 14mm plastificado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229298"
   },
   {
    "obra": "dmp",
@@ -492,8 +559,9 @@
    "nome": "Projeto Fundação profunda e cálices",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229296"
   },
   {
    "obra": "dmp",
@@ -501,8 +569,9 @@
    "nome": "SPT para dimensionamento de fundação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252771"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229295"
   },
   {
    "obra": "dmp",
@@ -510,8 +579,9 @@
    "nome": "Cabo PP 4 x 2.5mm²",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252773"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229317"
   },
   {
    "obra": "dmp",
@@ -519,8 +589,9 @@
    "nome": "Luminária Highbay redonda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252773"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229315"
   },
   {
    "obra": "dmp",
@@ -528,8 +599,9 @@
    "nome": "Mão de obra para instalação da iluminação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252773"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602229314"
   },
   {
    "obra": "dmp",
@@ -537,8 +609,9 @@
    "nome": "Tinta PU Verde Folha",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252776"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231311"
   },
   {
    "obra": "dmp",
@@ -546,8 +619,9 @@
    "nome": "Tinta Piso Concreto",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252776"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231314"
   },
   {
    "obra": "dmp",
@@ -555,8 +629,9 @@
    "nome": "Tinta epoxi amarela",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252776"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231316"
   },
   {
    "obra": "dmp",
@@ -564,8 +639,9 @@
    "nome": "Tinta epoxi preta",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252776"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231318"
   },
   {
    "obra": "dmp",
@@ -573,8 +649,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211870"
   },
   {
    "obra": "dmp",
@@ -582,8 +659,9 @@
    "nome": "Diária bomba de concreto - valor por metro bombeado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211876"
   },
   {
    "obra": "dmp",
@@ -591,8 +669,9 @@
    "nome": "Manta geotextil bidim",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211879"
   },
   {
    "obra": "dmp",
@@ -600,8 +679,9 @@
    "nome": "Mão de obra para concretagem do piso",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211874"
   },
   {
    "obra": "dmp",
@@ -609,8 +689,9 @@
    "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211873"
   },
   {
    "obra": "dmp",
@@ -618,8 +699,9 @@
    "nome": "Treliça TR8 CA-60 12m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252759"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211877"
   },
   {
    "obra": "dmp",
@@ -627,8 +709,9 @@
    "nome": "Locação de empilhadeira retrátil",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252756"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211866"
   },
   {
    "obra": "dmp",
@@ -636,8 +719,9 @@
    "nome": "Realocação da estação de abastecimento de gás das empilhadeiras",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252756"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211864"
   },
   {
    "obra": "dmp",
@@ -645,8 +729,9 @@
    "nome": "SPDA do galpão completo",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252756"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211862"
   },
   {
    "obra": "dmp",
@@ -654,8 +739,9 @@
    "nome": "Cumeeira natural 30x30",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211885"
   },
   {
    "obra": "dmp",
@@ -663,8 +749,9 @@
    "nome": "Frete do material de telhado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211887"
   },
   {
    "obra": "dmp",
@@ -672,8 +759,9 @@
    "nome": "Parafuso autobrocante 12 x 5\" 100uni.",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211884"
   },
   {
    "obra": "dmp",
@@ -681,8 +769,9 @@
    "nome": "Parafuso autobrocante 12 x 7/8 100uni.",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211888"
   },
   {
    "obra": "dmp",
@@ -690,8 +779,9 @@
    "nome": "Telha forro metalico natural x branco  0.43 eps 50mm f1 retardante a chamas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211880"
   },
   {
    "obra": "dmp",
@@ -699,8 +789,9 @@
    "nome": "Telha forro metalico natural x branco 0.43 eps 50mm f1 retardante a chamas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252760"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211883"
   },
   {
    "obra": "dmp",
@@ -708,8 +799,9 @@
    "nome": "Serviço de terraplanagem da área",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252770"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211889"
   },
   {
    "obra": "dmp",
@@ -717,8 +809,9 @@
    "nome": "Topografia do local para locação dos pontos de concretagem dos pilares",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252777"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231698"
   },
   {
    "obra": "dpa",
@@ -726,8 +819,9 @@
    "nome": "Estrutura drive-in",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252778"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231700"
   },
   {
    "obra": "dpa",
@@ -735,8 +829,9 @@
    "nome": "Frete",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252778"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231704"
   },
   {
    "obra": "dpa",
@@ -744,8 +839,9 @@
    "nome": "Montagem da estrutura",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252778"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231702"
   },
   {
    "obra": "dpa",
@@ -753,8 +849,9 @@
    "nome": "Projeto de combate ao incêndio - material, execução e aprovação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252818"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246974"
   },
   {
    "obra": "dpa",
@@ -762,8 +859,9 @@
    "nome": "Sistema de alarme de incêndio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252818"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246976"
   },
   {
    "obra": "dpa",
@@ -771,8 +869,9 @@
    "nome": "Cabo para instalação das Niveladoras",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246677"
   },
   {
    "obra": "dpa",
@@ -780,8 +879,9 @@
    "nome": "Cabo para instalação das portas automáticas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246674"
   },
   {
    "obra": "dpa",
@@ -789,8 +889,9 @@
    "nome": "Caixa Parafuso autobrocante 12 x 3/4\" 100un",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246795"
   },
   {
    "obra": "dpa",
@@ -798,8 +899,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249465"
   },
   {
    "obra": "dpa",
@@ -807,8 +909,9 @@
    "nome": "Diária bomba de concreto - valor por metro bombeado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602253367"
   },
   {
    "obra": "dpa",
@@ -816,8 +919,9 @@
    "nome": "Frete das rampas niveladoras",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602253366"
   },
   {
    "obra": "dpa",
@@ -825,8 +929,9 @@
    "nome": "Locação de plataforma para montagem das coberturas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249463"
   },
   {
    "obra": "dpa",
@@ -834,8 +939,9 @@
    "nome": "Manta Asfáltica PP Poliéster Tipo II Classe B 4mm 1x10m Impermanta",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246793"
   },
   {
    "obra": "dpa",
@@ -843,8 +949,9 @@
    "nome": "Mão de obra para concretagem do piso das docas de carregamento (1075m²)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246673"
   },
   {
    "obra": "dpa",
@@ -852,8 +959,9 @@
    "nome": "Mão de obra para fechamento em alvenaria e telhas na fachada do galpão DPA IV",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246570"
   },
   {
    "obra": "dpa",
@@ -861,8 +969,9 @@
    "nome": "Mão de obra para fechamento em alvenaria na parte interna do galpão blocado 1,20m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602251379"
   },
   {
    "obra": "dpa",
@@ -870,8 +979,9 @@
    "nome": "Mão de obra para montagem e cobertura da frente das docas de carregamento",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602251378"
   },
   {
    "obra": "dpa",
@@ -879,8 +989,9 @@
    "nome": "Perfil A/C 127x50 #3mm - Treliças",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246792"
   },
   {
    "obra": "dpa",
@@ -888,8 +999,9 @@
    "nome": "Perfil Enrijecido A/C 150x50x20mm #2mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602253371"
   },
   {
    "obra": "dpa",
@@ -897,8 +1009,9 @@
    "nome": "Perfil Enrijecido A/C 150x50x20mm #2mm - Treliças",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246790"
   },
   {
    "obra": "dpa",
@@ -906,8 +1019,9 @@
    "nome": "Portas automáticas para as docas - Porta Flex. Fast Roll Dock 2,4m (L) x 3m (A)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602251377"
   },
   {
    "obra": "dpa",
@@ -915,8 +1029,9 @@
    "nome": "Rampas Niveladoras para a expedição",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249462"
   },
   {
    "obra": "dpa",
@@ -924,8 +1039,9 @@
    "nome": "Rufo de encontro dos galpões",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246794"
   },
   {
    "obra": "dpa",
@@ -933,8 +1049,9 @@
    "nome": "Serviço de instalação das portas automáticas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602251376"
   },
   {
    "obra": "dpa",
@@ -942,8 +1059,9 @@
    "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246672"
   },
   {
    "obra": "dpa",
@@ -951,8 +1069,9 @@
    "nome": "Telha TP40 0.50mm comp 4000mm util 980mm galvalume",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602253369"
   },
   {
    "obra": "dpa",
@@ -960,8 +1079,9 @@
    "nome": "Telha Trapezoidal TP40 6600mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246679"
   },
   {
    "obra": "dpa",
@@ -969,8 +1089,9 @@
    "nome": "Treliça TR8 CA-60 12m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252817"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246788"
   },
   {
    "obra": "dpa",
@@ -978,8 +1099,9 @@
    "nome": "Cap esgoto PVC 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243966"
   },
   {
    "obra": "dpa",
@@ -987,8 +1109,9 @@
    "nome": "Joelho esgoto PVC 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243833"
   },
   {
    "obra": "dpa",
@@ -996,8 +1119,9 @@
    "nome": "Joelho esgoto PVC 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243963"
   },
   {
    "obra": "dpa",
@@ -1005,8 +1129,9 @@
    "nome": "Luva PVC esgoto 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243834"
   },
   {
    "obra": "dpa",
@@ -1014,8 +1139,9 @@
    "nome": "Mão de obra para montagem da rede de drenagem pluvial",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247429"
   },
   {
    "obra": "dpa",
@@ -1023,8 +1149,9 @@
    "nome": "Te esgoto PVC 250mm Redução para 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247431"
   },
   {
    "obra": "dpa",
@@ -1032,8 +1159,9 @@
    "nome": "Te esgoto PVC 250mm Redução para 150mm (Meio dos galpões)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243830"
   },
   {
    "obra": "dpa",
@@ -1041,8 +1169,9 @@
    "nome": "Tubo esgoto PVC branco 150mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243829"
   },
   {
    "obra": "dpa",
@@ -1050,8 +1179,9 @@
    "nome": "Tubo esgoto PVC branco 250mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243828"
   },
   {
    "obra": "dpa",
@@ -1059,8 +1189,9 @@
    "nome": "Tubo esgoto PVC branco 250mm (Meio dos galpões)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252822"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243832"
   },
   {
    "obra": "dpa",
@@ -1068,8 +1199,9 @@
    "nome": "Perfil Enrijecido A/C 150x50x20mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252826"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244238"
   },
   {
    "obra": "dpa",
@@ -1077,8 +1209,9 @@
    "nome": "Telha Trapeizodal TP40 3000mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252826"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244239"
   },
   {
    "obra": "dpa",
@@ -1086,8 +1219,9 @@
    "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252826"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244237"
   },
   {
    "obra": "dpa",
@@ -1095,8 +1229,9 @@
    "nome": "Caixa Parafuso autobrocante 12 x 3/4\" 100un",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244207"
   },
   {
    "obra": "dpa",
@@ -1104,8 +1239,9 @@
    "nome": "Frete para telhas",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244205"
   },
   {
    "obra": "dpa",
@@ -1113,8 +1249,9 @@
    "nome": "Mão de obra para Fechamento em Alvenaria",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243968"
   },
   {
    "obra": "dpa",
@@ -1122,8 +1259,9 @@
    "nome": "Perfil Enrijecido A/C 150x50x20mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243969"
   },
   {
    "obra": "dpa",
@@ -1131,8 +1269,9 @@
    "nome": "Rufo de acabamento galvanizado 140 x 140 x 20mm #20",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243970"
   },
   {
    "obra": "dpa",
@@ -1140,8 +1279,9 @@
    "nome": "Rufo de encontro dos galpões",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243971"
   },
   {
    "obra": "dpa",
@@ -1149,8 +1289,9 @@
    "nome": "Telha Trapeizodal TP40 6100mm #0,50mm",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252823"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602243967"
   },
   {
    "obra": "dpa",
@@ -1158,8 +1299,9 @@
    "nome": "Arrasamento das estacas, locação dos blocos e concretagem dos cálices",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246977"
   },
   {
    "obra": "dpa",
@@ -1167,8 +1309,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 24±2 fundação profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246978"
   },
   {
    "obra": "dpa",
@@ -1176,8 +1319,9 @@
    "nome": "Concreto para fundação rasa",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246980"
   },
   {
    "obra": "dpa",
@@ -1185,8 +1329,9 @@
    "nome": "Execução da fundação profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246979"
   },
   {
    "obra": "dpa",
@@ -1194,8 +1339,9 @@
    "nome": "Ferragem para fundação Profunda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602246981"
   },
   {
    "obra": "dpa",
@@ -1203,8 +1349,9 @@
    "nome": "Ferragem para fundação rasa",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257098"
   },
   {
    "obra": "dpa",
@@ -1212,8 +1359,9 @@
    "nome": "Madeirite para forma da fundação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257102"
   },
   {
    "obra": "dpa",
@@ -1221,8 +1369,9 @@
    "nome": "Projeto fundação profunda e cálices",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257106"
   },
   {
    "obra": "dpa",
@@ -1230,8 +1379,9 @@
    "nome": "Sondagem SPT após realização do aterro",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252819"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257311"
   },
   {
    "obra": "dpa",
@@ -1239,8 +1389,9 @@
    "nome": "Cabo PP 4 x 2.5mm²",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252825"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244236"
   },
   {
    "obra": "dpa",
@@ -1248,8 +1399,9 @@
    "nome": "Luminária Highbay redonda",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252825"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244234"
   },
   {
    "obra": "dpa",
@@ -1257,8 +1409,9 @@
    "nome": "Mão de obra para instalação da iluminação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252825"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244233"
   },
   {
    "obra": "dpa",
@@ -1266,8 +1419,9 @@
    "nome": "Tinta Piso Concreto",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252828"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244243"
   },
   {
    "obra": "dpa",
@@ -1275,8 +1429,9 @@
    "nome": "Tinta epoxi amarela",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252828"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244245"
   },
   {
    "obra": "dpa",
@@ -1284,8 +1439,9 @@
    "nome": "Tinta epoxi preta",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252828"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244246"
   },
   {
    "obra": "dpa",
@@ -1293,8 +1449,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257312"
   },
   {
    "obra": "dpa",
@@ -1302,8 +1459,9 @@
    "nome": "Diária bomba de concreto - valor por metro bombeado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257315"
   },
   {
    "obra": "dpa",
@@ -1311,8 +1469,9 @@
    "nome": "Manta geotextil bidim",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257318"
   },
   {
    "obra": "dpa",
@@ -1320,8 +1479,9 @@
    "nome": "Mão de obra para concretagem do piso do galpão 2100m²",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257314"
   },
   {
    "obra": "dpa",
@@ -1329,8 +1489,9 @@
    "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257313"
   },
   {
    "obra": "dpa",
@@ -1338,8 +1499,9 @@
    "nome": "Treliça TR8 CA-60 12m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252820"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257316"
   },
   {
    "obra": "dpa",
@@ -1347,8 +1509,9 @@
    "nome": "Concreto FCK 30 Brita 0 Slump 10±2",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602257321"
   },
   {
    "obra": "dpa",
@@ -1356,8 +1519,9 @@
    "nome": "Frete para entrega do Meio fio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247428"
   },
   {
    "obra": "dpa",
@@ -1365,8 +1529,9 @@
    "nome": "Meio Fio Padrão Novacap 30x15/12",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247427"
   },
   {
    "obra": "dpa",
@@ -1374,8 +1539,9 @@
    "nome": "Mão de obra para concretagem do piso e instalação do meio-fio",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247425"
   },
   {
    "obra": "dpa",
@@ -1383,8 +1549,9 @@
    "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252821"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602247426"
   },
   {
    "obra": "dpa",
@@ -1392,8 +1559,9 @@
    "nome": "Calha metálica para o pré moldado (de acordo com o projeto)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252813"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602232115"
   },
   {
    "obra": "dpa",
@@ -1401,8 +1569,9 @@
    "nome": "Estrutura em pré moldado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252813"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602231706"
   },
   {
    "obra": "dpa",
@@ -1410,8 +1579,9 @@
    "nome": "Sala de coordenação e banheiro de funcionários",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252827"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244240"
   },
   {
    "obra": "dpa",
@@ -1419,8 +1589,9 @@
    "nome": "Sala provisória para apontamento e coordenação",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252827"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244241"
   },
   {
    "obra": "dpa",
@@ -1428,8 +1599,9 @@
    "nome": "Análise + Sistema de tratamento para consumo final do poço artesiano",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249457"
   },
   {
    "obra": "dpa",
@@ -1437,8 +1609,9 @@
    "nome": "Bomba do poço artesiano",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249131"
   },
   {
    "obra": "dpa",
@@ -1446,8 +1619,9 @@
    "nome": "Cabo PP 120mm² Preto",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602232119"
   },
   {
    "obra": "dpa",
@@ -1455,8 +1629,9 @@
    "nome": "Cabo PP 4x10mm² Preto (ligação do poço artesiano)",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249139"
   },
   {
    "obra": "dpa",
@@ -1464,8 +1639,9 @@
    "nome": "Cabo PP 50mm² Preto",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602250555"
   },
   {
    "obra": "dpa",
@@ -1473,8 +1649,9 @@
    "nome": "Concreto para o radier do sistema de tratamento de esgoto do banheiro",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249137"
   },
   {
    "obra": "dpa",
@@ -1482,8 +1659,9 @@
    "nome": "Eletrocalha 100 x 100mm com virola galvanizada",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602250558"
   },
   {
    "obra": "dpa",
@@ -1491,8 +1669,9 @@
    "nome": "Ferragem para o Sistema de tratamento de esgoto do banheiro",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249138"
   },
   {
    "obra": "dpa",
@@ -1500,8 +1679,9 @@
    "nome": "Locação do munck para desmontagem do galpão",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249460"
   },
   {
    "obra": "dpa",
@@ -1509,8 +1689,9 @@
    "nome": "Material para estrutura e ligação do reservatório",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249135"
   },
   {
    "obra": "dpa",
@@ -1518,8 +1699,9 @@
    "nome": "Mão de obra para desmontagem da cobertura de enlonamento de caminhões e lateral do blocado",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602250553"
   },
   {
    "obra": "dpa",
@@ -1527,8 +1709,9 @@
    "nome": "Painel 1000x600x300mm A/C",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249458"
   },
   {
    "obra": "dpa",
@@ -1536,8 +1719,9 @@
    "nome": "Poço Artesiano para alimentação do alojamento",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602250551"
   },
   {
    "obra": "dpa",
@@ -1545,8 +1729,9 @@
    "nome": "Reservatório 5000 litros para o alojamento",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249459"
   },
   {
    "obra": "dpa",
@@ -1554,8 +1739,9 @@
    "nome": "Sistema de tratamento para esgoto do banheiro",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252814"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602232117"
   },
   {
    "obra": "dpa",
@@ -1563,8 +1749,9 @@
    "nome": "Cumeeiras tp40 0.50mm largura util 980mm galvalume",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244211"
   },
   {
    "obra": "dpa",
@@ -1572,8 +1759,9 @@
    "nome": "Parafuso de costura telha/telha",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244232"
   },
   {
    "obra": "dpa",
@@ -1581,8 +1769,9 @@
    "nome": "Parafuso de fixação telha/terça",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244213"
   },
   {
    "obra": "dpa",
@@ -1590,8 +1779,9 @@
    "nome": "Telha tp40 0.50mm comp 7300mm largura util 980mm galvalume",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244209"
   },
   {
    "obra": "dpa",
@@ -1599,8 +1789,9 @@
    "nome": "Telhas tp40 0.50mm comp 5600mm largura util 980mm galvalume",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252824"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602244210"
   },
   {
    "obra": "dpa",
@@ -1608,9 +1799,10 @@
    "nome": "Serviço de terraplanagem da área",
    "status": "A negociar",
    "arquivos": 0,
+   "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252816"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249461"
   }
  ],
- "atualizado": "20/11/2026 11:41"
+ "atualizado": "20/11/2026 11:47"
 }
