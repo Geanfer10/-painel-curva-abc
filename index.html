@@ -201,6 +201,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .st.ok{border-color:#9fd2b0;background:#e6f4ea;color:#11683a}
 .cn .ok-n{color:#11683a}
 .contr{margin-top:4px}
+.orc-et{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;margin:6px 0 4px;background:#f1f6f2;border:1px solid var(--rule);border-radius:8px;font-size:13px;font-weight:600}
+.orc-et>span:first-child{margin-right:4px}
 .contr .barc{height:8px;border-radius:4px;background:#e3ece6;overflow:hidden;margin-top:8px}
 .contr .barc i{display:block;height:100%;background:#1f9d55;border-radius:4px}
 .pdf{display:inline-flex;align-items:center;gap:4px;font:500 12px var(--f-mono);color:var(--c);text-decoration:none;border:1px solid var(--rule);background:var(--panel);border-radius:5px;padding:3px 8px}
@@ -402,17 +404,32 @@ async function carregarMonday(){
     const r=await fetch("dados/monday.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return false;
     const txt=await r.text(); if(txt===SIGM) return false;
     const j=JSON.parse(txt), m=new Map(); (j.itens||[]).forEach(x=>m.set(chaveM(x.obra,x.etapa,x.nome),x));
-    MON={map:m,board:j.board,atualizado:j.atualizado}; SIGM=txt; return true;
+    const me=new Map(); (j.etapas||[]).forEach(x=>me.set(k2(x.obra,x.etapa),x));
+    MON={map:m,etapas:me,board:j.board,atualizado:j.atualizado}; SIGM=txt; return true;
   }catch(e){ console.warn("monday.json:",e); return false; }
 }
+const k2=(k,etapa)=>k+"|"+norm(etapa);
 const infoM=(k,etapa,nome)=>MON?MON.map.get(chaveM(k,etapa,nome)):null;
+const infoE=(k,etapa)=>MON&&MON.etapas?MON.etapas.get(k2(k,etapa)):null;
+/* botões de orçamento: 1 arquivo = "Baixar orçamento"; vários = "Orçamento 1", "Orçamento 2"...
+   o link "protected_static" do Monday baixa o arquivo (precisa estar logado no Monday) */
+function botoesOrc(x){
+  if(!x) return "";
+  const l=x.orcamentos||(x.arquivos>0&&x.url?[{nome:"Orçamento",url:x.url}]:[]);
+  const b=l.map((o,i)=>`<a class="pdf" href="${esc(o.url)}" target="_blank" rel="noopener" title="${esc(o.nome)}">⬇ ${l.length>1?`Orçamento ${i+1}`:"Baixar orçamento"}</a>`);
+  if(x.link) b.push(`<a class="pdf" href="${esc(x.link)}" target="_blank" rel="noopener">🔗 Link do orçamento</a>`);
+  return b.join("");
+}
+const temOrc=x=>!!x&&((x.orcamentos&&x.orcamentos.length)||x.link);
+function linhaEtapa(k,etapa){ // orçamento da etapa: aparece uma vez, no topo da lista de itens
+  const e=infoE(k,etapa); if(!temOrc(e)) return "";
+  return `<div class="orc-et"><span>Orçamento da etapa</span><span class="st ${assinado(e)?"ok":""}">${esc(e.status)}</span>${botoesOrc(e)}</div>`;
+}
 const assinado=x=>!!x&&/assinad|contratad/i.test(x.status||"");
 function tagM(x){
   if(!x) return "";
   const st=`<span class="st ${assinado(x)?"ok":""}">${esc(x.status||"A negociar")}</span>`;
-  const href=x.link||(x.arquivos>0?x.url:"");
-  const orc=href?`<a class="pdf" href="${esc(href)}" target="_blank" rel="noopener">📄 Orçamento${x.arquivos>1?` (${x.arquivos})`:""}</a>`:"";
-  return `<span class="mon">${st}${orc}</span>`;
+  return `<span class="mon">${st}${botoesOrc(x)}</span>`;
 }
 function contratado(k){ // soma dos valores da planilha cujos itens estão com contrato assinado
   let v=0,n=0,tot=0; cats(k).forEach(c=>c[2].forEach(i=>{tot++; if(assinado(infoM(k,c[0],i[0]))){v+=i[1];n++;}})); return {v,n,tot};
@@ -677,16 +694,16 @@ function panePrev(k){
     const links=orcLinks(g.m.map(x=>x.orc));
     return `<div class="si" data-a style="--i:${i}"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}${links?`<div class="pdfs">${links}</div>`:""}${tagM(infoM(k,g.m[0].cat,g.m[0].d))}</div>${val}</div>`;
   }).join("");
-  return head(2,"O que precisa acontecer antes da obra começar.")+(rows?`<div class="svc">${rows}</div>
+  return head(2,"O que precisa acontecer antes da obra começar.")+(its.length?linhaEtapa(k,its[0].cat):"")+(rows?`<div class="svc">${rows}</div>
     <div class="svtot"><span>Total dos serviços preliminares${pend?` (${pend} sem preço)`:""}</span><b class="num">${brl(tot)}</b></div>`
     :`<p class="note">Nenhum item com a categoria "Serviço Preliminar" na planilha.</p>`);
 }
 /* 04 · Investimento total */
 function paneInv(k){
   const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=totalPrel(k);
-  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}${(n=>n?` · <span class="mud" style="margin:0">${n} ${n===1?"alterado":"alterados"}</span>`:"")(x[2].filter(i=>seloMud(k,x[0],i[0])).length)}</small></span>
+  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}${(n=>n?` · <span class="mud" style="margin:0">${n} ${n===1?"alterado":"alterados"}</span>`:"")(x[2].filter(i=>seloMud(k,x[0],i[0])).length)}${temOrc(infoE(k,x[0]))?` · <span title="Etapa com orçamento">📄</span>`:""}</small></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
-      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${seloMud(k,x[0],it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
+      <div class="items">${linhaEtapa(k,x[0])}${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${seloMud(k,x[0],it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <div class="kpis"><aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>

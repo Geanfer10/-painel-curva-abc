@@ -20,7 +20,8 @@ def api(q, v=None):
     return r["data"]
 
 def cols(ids): return "column_values(ids: [%s]) { id text value }" % ",".join('"%s"' % i for i in ids.values())
-CAMPOS = "items { id name group { id title } %s subitems { id name %s } }" % (cols(P), cols(S))
+def arqs(C): return 'assets(assets_source: columns, column_ids: ["%s"]) { name url }' % C["arq"]
+CAMPOS = "items { id name group { id title } %s %s subitems { id name %s %s } }" % (cols(P), arqs(P), cols(S), arqs(S))
 pg = api("query { boards(ids: %d) { items_page(limit: 200) { cursor %s } } }" % (BOARD, CAMPOS))["boards"][0]["items_page"]
 itens, cursor = pg["items"], pg["cursor"]
 while cursor:
@@ -32,22 +33,24 @@ def ler(item, C):
     def js(cid):
         try: return json.loads((cv.get(cid) or {}).get("value") or "{}") or {}
         except Exception: return {}
+    # link "protected_static": baixa o arquivo direto, mas só para quem está logado no Monday
+    orc = [{"nome": a["name"], "url": a["url"]} for a in item.get("assets") or [] if a.get("url")]
     return {"status": ((cv.get(C["status"]) or {}).get("text") or "").strip(),
-            "arquivos": len(js(C["arq"]).get("files", [])), "link": js(C["link"]).get("url", "") or ""}
+            "arquivos": len(orc), "orcamentos": orc, "link": js(C["link"]).get("url", "") or ""}
 
 saida, etapas = [], []
 for it in itens:
     obra = GRUPOS.get(it["group"]["id"]) or ("dmp" if "dmp" in it["group"]["title"].lower() else "dpa")
     pai, url_pai = ler(it, P), f"{CONTA}/boards/{BOARD}/pulses/{it['id']}"
     etapas.append({"obra": obra, "etapa": it["name"], "status": pai["status"] or "A negociar",
-                   "arquivos": pai["arquivos"], "link": pai["link"], "url": url_pai})
+                   "arquivos": pai["arquivos"], "orcamentos": pai["orcamentos"], "link": pai["link"], "url": url_pai})
     for sub in it.get("subitems") or []:
-        f = ler(sub, S); proprio = f["arquivos"] > 0 or f["link"]
+        f = ler(sub, S)
+        # orçamento da etapa aparece uma vez só, na etapa; aqui ficam só os orçamentos próprios do item
         saida.append({"obra": obra, "etapa": it["name"], "nome": sub["name"],
                       "status": f["status"] or pai["status"] or "A negociar",
-                      "arquivos": f["arquivos"] if proprio else pai["arquivos"],
-                      "link": f["link"] if proprio else pai["link"],
-                      "url": f"{CONTA}/boards/{SUBBOARD}/pulses/{sub['id']}" if proprio else url_pai})
+                      "arquivos": f["arquivos"], "orcamentos": f["orcamentos"], "link": f["link"],
+                      "url": f"{CONTA}/boards/{SUBBOARD}/pulses/{sub['id']}"})
 saida.sort(key=lambda x: (x["obra"], x["etapa"], x["nome"])); etapas.sort(key=lambda x: (x["obra"], x["etapa"]))
 novo = {"board": f"{CONTA}/boards/{BOARD}", "etapas": etapas, "itens": saida}
 caminho = "dados/monday.json"
