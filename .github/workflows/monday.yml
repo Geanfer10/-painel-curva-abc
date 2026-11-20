@@ -1,7 +1,10 @@
 name: Status do Monday
 on:
+  push:
+    branches: [main]
+    paths: ["dados/planilha.xlsx"]      # a planilha mudou (robô do PC) -> leva pro Monday na hora
   schedule:
-    - cron: "*/10 10-23 * * 1-6"   # a cada 10 min, das 7h às 20h (Brasília), seg a sáb
+    - cron: "*/10 10-23 * * 1-6"         # a cada 10 min, das 7h às 20h (Brasília), seg a sáb
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -13,7 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Buscar status e orçamentos no Monday
+      - name: Planilha -> Monday (etapas, itens novos e valores)
+        if: github.event_name != 'schedule'
+        env:
+          MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
+        run: |
+          pip install -q openpyxl
+          python3 scripts/planilha_para_monday.py
+      - name: Monday -> painel (status e orçamentos)
         env:
           MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
         run: python3 scripts/monday_sync.py
