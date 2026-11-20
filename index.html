@@ -151,9 +151,15 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .big .row b{font-family:var(--f-mono);font-weight:500;color:var(--fg)}
 .cats{display:flex;flex-direction:column;gap:6px}
 .cat{background:var(--panel);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
-.cat>button{width:100%;display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 150px 22px;gap:14px;align-items:center;background:none;border:0;padding:12px 16px;cursor:pointer;text-align:left}
+.cat>button{width:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 150px 22px;gap:14px;align-items:center;background:none;border:0;padding:12px 16px;cursor:pointer;text-align:left}
 .cat .cn{font-weight:600;font-size:14.5px}
 .cat .cn small{display:block;font:400 11.5px var(--f-mono);color:var(--muted)}
+.cat .cn-m{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:4px;font-weight:400}
+.cat .cn-m small{display:inline}
+.cat .cn-s{display:contents}
+.cat .cn-s .st{font-size:11px;padding:2px 8px}
+.st.parc{border-color:#a9c7ef;background:#e8f0fb;color:#1d4f91}
+.orc-chip{display:inline-flex;align-items:center;gap:4px;font:500 11px var(--f-mono);border:1px solid var(--rule);background:var(--panel);color:var(--c);border-radius:999px;padding:2px 8px}
 .cat .tr{height:12px;background:var(--panel-2);border-radius:2px;overflow:hidden}
 .cat .tr i{display:block;height:100%;background:var(--c);transform-origin:left;animation:grow 1s cubic-bezier(.2,.75,.15,1) both;animation-delay:calc(var(--k) * 60ms + 250ms)}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -421,6 +427,14 @@ function botoesOrc(x){
   return b.join("");
 }
 const temOrc=x=>!!x&&((x.orcamentos&&x.orcamentos.length)||x.link);
+/* selo da etapa já na lista fechada: status geral + se tem orçamento */
+function seloEtapa(k,x){
+  if(!MON) return "";
+  const n=x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length, t=x[2].length, e=infoE(k,x[0]);
+  const st=n===t&&t?`<span class="st ok">Contrato assinado</span>`:n?`<span class="st parc">${n} de ${t} contratados</span>`:`<span class="st">${esc((e&&e.status)||"A negociar")}</span>`;
+  const orc=temOrc(e)?`<span class="orc-chip" title="Etapa com orçamento anexado">📄 orçamento</span>`:"";
+  return `<span class="cn-s">${st}${orc}</span>`;
+}
 function linhaEtapa(k,etapa){ // orçamento da etapa: aparece uma vez, no topo da lista de itens
   const e=infoE(k,etapa); if(!temOrc(e)) return "";
   return `<div class="orc-et"><span>Orçamento da etapa</span><span class="st ${assinado(e)?"ok":""}">${esc(e.status)}</span>${botoesOrc(e)}</div>`;
@@ -701,7 +715,7 @@ function panePrev(k){
 /* 04 · Investimento total */
 function paneInv(k){
   const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=totalPrel(k);
-  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}${(n=>n?` · <span class="mud" style="margin:0">${n} ${n===1?"alterado":"alterados"}</span>`:"")(x[2].filter(i=>seloMud(k,x[0],i[0])).length)}${temOrc(infoE(k,x[0]))?` · <span title="Etapa com orçamento">📄</span>`:""}</small></span>
+  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<span class="cn-m">${seloEtapa(k,x)}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="mud" style="margin:0">${n} ${n===1?"alterado":"alterados"}</span>`:"")(x[2].filter(i=>seloMud(k,x[0],i[0])).length)}</small></span></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
       <div class="items">${linhaEtapa(k,x[0])}${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${seloMud(k,x[0],it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
