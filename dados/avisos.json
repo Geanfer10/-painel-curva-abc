@@ -1,0 +1,18 @@
+{
+ "lotes": [
+  {
+   "quando": "20/11/2026 10:26",
+   "iso": "2026-11-20T10:26-03:00",
+   "mudancas": [
+    {
+     "obra": "dmp",
+     "tipo": "valor",
+     "etapa": "Armazenamento",
+     "item": "Montagem da estrutura",
+     "de": 70700,
+     "para": 70701
+    }
+   ]
+  }
+ ]
+}
