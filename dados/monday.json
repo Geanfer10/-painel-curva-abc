@@ -352,8 +352,13 @@
    "nome": "Projeto de combate ao incêndio - material e execução",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "AVCB DMP.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402188639/AVCB%20DMP.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211867"
   },
@@ -363,8 +368,13 @@
    "nome": "Sistema de Alarme de incêndio",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Alarme de Incêndio DMP.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402190039/Alarme%20de%20Inc%C3%AAndio%20DMP.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211868"
   },
@@ -748,8 +758,13 @@
    "nome": "Mão de obra para concretagem do piso",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "M.O Concretagem DMP.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402206785/M.O%20Concretagem%20DMP.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211874"
   },
@@ -759,8 +774,13 @@
    "nome": "Tela POP 10x10 Fio 4.2mm EQ138 2,45 x 6,00m",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Tela e Treliça para o Piso.jpeg",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402200667/Tela%20e%20Treli%C3%A7a%20para%20o%20Piso.jpeg"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211873"
   },
@@ -770,8 +790,13 @@
    "nome": "Treliça TR8 CA-60 12m",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Tela e Treliça para o Piso.jpeg",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402208912/Tela%20e%20Treli%C3%A7a%20para%20o%20Piso.jpeg"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211877"
   },
@@ -803,8 +828,13 @@
    "nome": "SPDA do galpão completo",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "IMPLANTAÇÃO SPDA PDI - GOIÁS VERDE - 01980-2026 - REV0.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402182639/IMPLANTA%C3%87%C3%83O%20SPDA%20PDI%20-%20GOI%C3%81S%20VERDE%20-%2001980-2026%20-%20REV0.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211862"
   },
@@ -814,8 +844,13 @@
    "nome": "Cumeeira natural 30x30",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Telhado Isopainel em PIR- GALVAXBRANCO_261105_113332.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402218737/Telhado%20Isopainel%20em%20PIR-%20GALVAXBRANCO_261105_113332.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211885"
   },
@@ -825,8 +860,13 @@
    "nome": "Frete do material de telhado",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Telhado Isopainel em PIR- GALVAXBRANCO_261105_113332.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402219014/Telhado%20Isopainel%20em%20PIR-%20GALVAXBRANCO_261105_113332.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211887"
   },
@@ -836,8 +876,13 @@
    "nome": "Parafuso autobrocante 12 x 5\" 100uni.",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Telhado Isopainel em PIR- GALVAXBRANCO_261105_113332.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402218458/Telhado%20Isopainel%20em%20PIR-%20GALVAXBRANCO_261105_113332.pdf"
+    }
+   ],
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211884"
   },
@@ -850,18 +895,23 @@
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211888"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13605207790"
   },
   {
    "obra": "dmp",
    "etapa": "Telhado",
-   "nome": "Telha forro metalico natural x branco  0.43 eps 50mm f1 retardante a chamas",
+   "nome": "Telha forro metalico natural x branco 0.43 eps 50mm f1 retardante a chamas",
    "status": "A negociar",
    "cor": "#fdab3d",
-   "arquivos": 0,
-   "orcamentos": [],
+   "arquivos": 1,
+   "orcamentos": [
+    {
+     "nome": "Telhado Isopainel em PIR- GALVAXBRANCO_261105_113332.pdf",
+     "url": "https://messigean18s-team.monday.com/protected_static/32690846/resources/3402218057/Telhado%20Isopainel%20em%20PIR-%20GALVAXBRANCO_261105_113332.pdf"
+    }
+   ],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211880"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211883"
   },
   {
    "obra": "dmp",
@@ -872,7 +922,7 @@
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
-   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602211883"
+   "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13605213702"
   },
   {
    "obra": "dmp",
@@ -1986,5 +2036,5 @@
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249461"
   }
  ],
- "atualizado": "20/11/2026 12:13"
+ "atualizado": "20/11/2026 15:33"
 }
