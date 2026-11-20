@@ -5,7 +5,7 @@
    "obra": "dmp",
    "etapa": "Armazenamento",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
   },
@@ -29,7 +29,7 @@
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
   },
@@ -248,7 +248,7 @@
    "etapa": "Armazenamento",
    "nome": "Estrutura Porta Pallet",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
   },
@@ -257,7 +257,7 @@
    "etapa": "Armazenamento",
    "nome": "Frete",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
   },
@@ -266,7 +266,7 @@
    "etapa": "Armazenamento",
    "nome": "Montagem da estrutura",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252755"
   },
@@ -356,7 +356,7 @@
    "etapa": "Estrutura Metálica",
    "nome": "Fechamento das treliças do galpão em chapa galvanizada",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
   },
@@ -365,7 +365,7 @@
    "etapa": "Estrutura Metálica",
    "nome": "Galpão em estrutura metálica 50 x 40 x 12m - Fechamentos inclusos M.O",
    "status": "A negociar",
-   "arquivos": 0,
+   "arquivos": 1,
    "link": "",
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252754"
   },
@@ -1612,5 +1612,5 @@
    "url": "https://messigean18s-team.monday.com/boards/18440874858/pulses/13602252816"
   }
  ],
- "atualizado": "20/11/2026 10:13"
+ "atualizado": "20/11/2026 11:41"
 }
