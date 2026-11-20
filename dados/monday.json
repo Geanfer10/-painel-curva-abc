@@ -36,7 +36,7 @@
   {
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
-   "status": "A negociar",
+   "status": "Contrato assinado",
    "arquivos": 1,
    "orcamentos": [
     {
@@ -122,7 +122,7 @@
   {
    "obra": "dmp",
    "etapa": "Terraplanagem",
-   "status": "A negociar",
+   "status": "Contrato assinado",
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
@@ -407,7 +407,7 @@
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
    "nome": "Fechamento das treliças do galpão em chapa galvanizada",
-   "status": "A negociar",
+   "status": "Contrato assinado",
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
@@ -417,7 +417,7 @@
    "obra": "dmp",
    "etapa": "Estrutura Metálica",
    "nome": "Galpão em estrutura metálica 50 x 40 x 12m - Fechamentos inclusos M.O",
-   "status": "A negociar",
+   "status": "Contrato assinado",
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
@@ -797,7 +797,7 @@
    "obra": "dmp",
    "etapa": "Terraplanagem",
    "nome": "Serviço de terraplanagem da área",
-   "status": "A negociar",
+   "status": "Contrato assinado",
    "arquivos": 0,
    "orcamentos": [],
    "link": "",
@@ -1804,5 +1804,5 @@
    "url": "https://messigean18s-team.monday.com/boards/18440876188/pulses/13602249461"
   }
  ],
- "atualizado": "20/11/2026 11:47"
+ "atualizado": "20/11/2026 12:11"
 }
