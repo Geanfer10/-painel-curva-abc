@@ -485,6 +485,36 @@ function aplicarRoteiro(slides){
       const lp=ps.slice(1).find(l=>/posic/.test(norm(l))); o.arm.posicoes=lp?numPt(lp):null;
     }
   });
+  aplicarPlan();
+}
+/* aba "Dados do Painel" da planilha: substitui o PowerPoint. Linha 1 = Campo | Ampliação DMP | DPA IV.
+   O que estiver preenchido aqui vale por cima do PowerPoint. */
+let PLAN=null;
+function lerPlan(sheets){
+  const sh=sheets.find(x=>/painel/.test(norm(x.name))); if(!sh) return null;
+  const rows=sh.rows.map(r=>Array.from(r)); const hi=rows.findIndex(r=>r.some(c=>/dmp/.test(norm(c)))&&r.some(c=>/dpa|produto acabado/.test(norm(c)))); if(hi<0) return null;
+  const h=rows[hi].map(norm), col={dmp:h.findIndex(c=>/dmp/.test(c)), dpa:h.findIndex(c=>/dpa|produto acabado/.test(c))};
+  const out={dmp:{},dpa:{}};
+  rows.slice(hi+1).forEach(r=>{const campo=norm(r.find(c=>c!=null&&String(c).trim()!=="")); if(!campo) return;
+    for(const k of ["dmp","dpa"]){ const v=r[col[k]]; if(v==null||String(v).trim()==="") continue; out[k][campo]=v; }});
+  return out;
+}
+function aplicarPlan(){
+  if(!PLAN) return;
+  for(const k of ["dmp","dpa"]){ const p=PLAN[k], o=OBRAS[k]; if(!p) continue;
+    const num=v=>typeof v==="number"?v:numPt(v);
+    for(const [c,v] of Object.entries(p)){
+      if(/^tipo do galpao|^galpao/.test(c)) o.galpao.tipo=String(v).trim();
+      else if(/^comprimento/.test(c)) o.galpao.L=num(v);
+      else if(/^largura/.test(c)) o.galpao.W=num(v);
+      else if(/^pe.?direito/.test(c)) o.galpao.H=num(v);
+      else if(/^area/.test(c)) o.galpao.area=num(v);
+      else if(/^vao livre/.test(c)) o.galpao.vaoLivre=/^(sim|s|x)$/.test(norm(v))?`${fmt(o.galpao.W,0)} m`:(/^(nao|n)$/.test(norm(v))?"":String(v));
+      else if(/^tipo (de|da) armazenagem|^armazenagem/.test(c)){ o.arm.tipo=String(v).trim(); const t=norm(v); o.arm.modelo=/drive/.test(t)?"drive":/pallet/.test(t)?"porta":o.arm.modelo; }
+      else if(/posic/.test(c)) o.arm.posicoes=num(v);
+    }
+    if(p["vao livre"]==null&&o.galpao.vaoLivre&&o.galpao.W) o.galpao.vaoLivre=`${fmt(o.galpao.W,0)} m`;
+  }
 }
 async function carregarRoteiro(){
   try{
@@ -512,7 +542,7 @@ async function carregar(){
       wb.sheets.forEach(s=>{const r=parseSheet(s.rows); if(r&&r.length) d[s.name]=agrupar(r);});
       const faltam=Object.values(OBRAS).filter(o=>!d[o.sheet]).map(o=>o.sheet);
       if(faltam.length) throw new Error("não achei a aba "+faltam.join(" e "));
-      const primeira=!SIG; DATA=d; SIG=sig; PRAZO=lerPrazo(wb.sheets);
+      const primeira=!SIG; DATA=d; SIG=sig; PRAZO=lerPrazo(wb.sheets); PLAN=lerPlan(wb.sheets); aplicarPlan();
       st.dataset.mod=wb.modified?fmtDT(wb.modified):"—";
       cabecalho(); render(primeira);
     }
@@ -589,7 +619,7 @@ function paneGalpao(k){
   return head(0,g.tipo)+`<div class="g2">
     <div class="specs">
       <div class="spec" data-a style="--i:0"><div class="k">Comprimento</div><div class="v num">${g.L}<small>m</small></div></div>
-      <div class="spec" data-a style="--i:1"><div class="k">Largura</div><div class="v num">${g.W}<small>m</small></div><div class="d">vão livre de ${g.vaoLivre}</div></div>
+      <div class="spec" data-a style="--i:1"><div class="k">Largura</div><div class="v num">${g.W}<small>m</small></div>${g.vaoLivre?`<div class="d">vão livre de ${g.vaoLivre}</div>`:""}</div>
       <div class="spec" data-a style="--i:2"><div class="k">Pé-direito</div><div class="v num">${g.H}<small>m</small></div></div>
       <div class="spec" data-a style="--i:3"><div class="k">Área total</div><div class="v num">${fmt(g.area,0)}<small>m²</small></div></div>
     </div>
