@@ -170,6 +170,30 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .it small{display:block;color:var(--muted);font-size:12px}
 .note{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
 .pdfs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+/* quadro de mudanças na planilha */
+#avisos:empty{display:none}
+#avisos{margin:0 0 18px}
+.avs{background:var(--panel);border:1px solid var(--rule);border-left:4px solid #c7861a;border-radius:10px;box-shadow:0 6px 16px -12px rgba(15,46,28,.45)}
+.avs>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px}
+.avs>summary::-webkit-details-marker{display:none}
+.avs>summary:focus-visible{outline:2px solid #c7861a;outline-offset:2px}
+.avs .ic{width:28px;height:28px;border-radius:50%;background:#fdf3e1;color:#8a5a0c;display:grid;place-items:center;font-weight:700;flex:none}
+.avs .tt{font-weight:600}
+.avs .qd{font:500 12px var(--f-mono);color:var(--muted)}
+.avs .ch{margin-left:auto;color:var(--muted);transition:transform .2s}
+.avs[open] .ch{transform:rotate(90deg)}
+.avs .lote{border-top:1px solid var(--rule);padding:10px 18px 12px}
+.avs .lote h4{margin:0 0 6px;font:500 12px var(--f-mono);color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+.avs .mu{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--rule);font-size:13.5px}
+.avs .mu:last-child{border-bottom:0}
+.avs .tp{font:500 11.5px var(--f-mono);border-radius:999px;padding:2px 8px;justify-self:start;white-space:nowrap}
+.tp.valor{background:#e8f0fb;color:#1d4f91}.tp.novo,.tp.etapa_nova{background:#e6f4ea;color:#11683a}.tp.removido,.tp.etapa_removida{background:#fbe9e9;color:#9b2c2c}
+.avs .on{color:var(--muted);font-size:12px;display:block}
+.avs .dv{font-family:var(--f-mono);font-size:12.5px;text-align:right;white-space:nowrap}
+.avs .dv .up{color:#9b2c2c}.avs .dv .dn{color:#11683a}
+.avs .mais{padding:0 18px 12px;font:500 12px var(--f-mono);color:var(--faint)}
+.mud{display:inline-flex;align-items:center;gap:4px;font:500 11px var(--f-mono);background:#e8f0fb;color:#1d4f91;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:1px}
+@media (max-width:640px){.avs .mu{grid-template-columns:1fr}.avs .dv{text-align:left}}
 /* status e orçamento vindos do Monday */
 .mon{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
 .st{display:inline-flex;align-items:center;gap:5px;font:500 11.5px var(--f-mono);border-radius:999px;padding:3px 9px;border:1px solid #e7c58b;background:#fdf3e1;color:#8a5a0c;white-space:nowrap}
@@ -223,6 +247,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
     </div>
   </header>
 
+  <div id="avisos"></div>
   <div class="steps" role="tablist" id="steps" aria-label="Etapas"></div>
   <div class="stage" id="stage"></div>
 </div>
@@ -392,6 +417,35 @@ function tagM(x){
 function contratado(k){ // soma dos valores da planilha cujos itens estão com contrato assinado
   let v=0,n=0,tot=0; cats(k).forEach(c=>c[2].forEach(i=>{tot++; if(assinado(infoM(k,c[0],i[0]))){v+=i[1];n++;}})); return {v,n,tot};
 }
+/* ---------- avisos: mudanças na planilha detectadas pelo robô (scripts/avisos_planilha.py) ---------- */
+let AV=null, SIGA="";
+const DIAS_AVISO=30, DIAS_SELO=7;
+async function carregarAvisos(){
+  try{ const r=await fetch("dados/avisos.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return false;
+    const t=await r.text(); if(t===SIGA) return false; AV=JSON.parse(t); SIGA=t; return true;
+  }catch(e){ console.warn("avisos.json:",e); return false; }
+}
+const idadeDias=l=>(Date.now()-new Date(l.iso).getTime())/864e5;
+function lotesObra(k,dias){ return AV?(AV.lotes||[]).filter(l=>idadeDias(l)<=dias).map(l=>({...l,mudancas:l.mudancas.filter(m=>m.obra===k)})).filter(l=>l.mudancas.length):[]; }
+function seloMud(k,etapa,item){ // item alterado ou novo nos últimos dias
+  for(const l of lotesObra(k,DIAS_SELO)) for(const m of l.mudancas)
+    if((m.tipo==="valor"||m.tipo==="novo")&&norm(m.etapa)===norm(etapa)&&norm(m.item)===norm(item)) return `<span class="mud" title="${m.tipo==="novo"?"Item novo":"Valor alterado"} em ${esc(l.quando)}">${m.tipo==="novo"?"novo":"alterado"} ${esc(l.quando.slice(0,5))}</span>`;
+  return "";
+}
+const TIPO={valor:"Valor alterado",novo:"Item novo",removido:"Item removido",etapa_nova:"Etapa nova",etapa_removida:"Etapa removida"};
+function blocoAvisos(k){
+  const lotes=lotesObra(k,DIAS_AVISO); if(!lotes.length) return "";
+  const n=lotes.reduce((s,l)=>s+l.mudancas.length,0), aberto=idadeDias(lotes[0])<=2;
+  const dv=m=>{ if(m.tipo==="valor"){ const d=(m.para||0)-(m.de||0); return `${m.de!=null?brl(m.de):"sem preço"} → <b>${m.para!=null?brl(m.para):"sem preço"}</b> <span class="${d>0?"up":"dn"}">(${d>0?"+":"−"}${brl(Math.abs(d))})</span>`; }
+    if(m.tipo.endsWith("removido")||m.tipo==="etapa_removida") return `<s>${m.de!=null?brl(m.de):"—"}</s>`;
+    return `<b>${m.para!=null?brl(m.para):"sem preço"}</b>`; };
+  const MAXL=4;
+  return `<details class="avs" ${aberto?"open":""}><summary><span class="ic" aria-hidden="true">!</span><span class="tt">Mudanças na planilha</span>
+    <span class="qd">${n} ${n===1?"mudança":"mudanças"} nesta obra nos últimos ${DIAS_AVISO} dias · última em ${esc(lotes[0].quando)}</span><span class="ch">›</span></summary>
+    ${lotes.slice(0,MAXL).map(l=>`<div class="lote"><h4>Planilha salva em ${esc(l.quando)}</h4>${l.mudancas.map(m=>`<div class="mu"><span class="tp ${m.tipo}">${TIPO[m.tipo]||m.tipo}</span>
+      <span>${m.item?esc(m.item):`<b>${esc(m.etapa)}</b>`}${m.item?`<span class="on">${esc(m.etapa)}</span>`:""}</span><span class="dv">${dv(m)}</span></div>`).join("")}</div>`).join("")}
+    ${lotes.length>MAXL?`<p class="mais">+ ${lotes.length-MAXL} salvamentos mais antigos</p>`:""}</details>`;
+}
 const ARQ="dados/planilha.xlsx", ARQ_PPT="dados/roteiro.pptx", INTERVALO_MS=60000;
 let SIGP="";
 /* ---------- roteiro em PowerPoint (dados/roteiro.pptx, enviado pelo robô) ----------
@@ -451,8 +505,8 @@ async function carregar(){
     const res=await fetch(ARQ+"?t="+Date.now(),{cache:"no-store"});
     if(!res.ok) throw new Error("não encontrei "+ARQ+" (HTTP "+res.status+")");
     const buf=await res.arrayBuffer(), sig=assinatura(buf);
-    const mudouPpt=await carregarRoteiro(), mudouMon=await carregarMonday();
-    if((mudouPpt||mudouMon) && sig===SIG){ render(); }
+    const mudouPpt=await carregarRoteiro(), mudouMon=await carregarMonday(), mudouAv=await carregarAvisos();
+    if((mudouPpt||mudouMon||mudouAv) && sig===SIG){ render(); }
     if(sig!==SIG){
       const wb=await lerXlsx(buf), d={};
       wb.sheets.forEach(s=>{const r=parseSheet(s.rows); if(r&&r.length) d[s.name]=agrupar(r);});
@@ -511,6 +565,7 @@ function render(){
   const tot=totalDe(state.o);
   document.getElementById("obraNome").textContent=o.nome;
   document.getElementById("obraSub").textContent=o.sub;
+  document.getElementById("avisos").innerHTML=blocoAvisos(state.o);
 
   document.querySelectorAll(".obra").forEach(b=>b.setAttribute("aria-pressed",b.dataset.o===state.o));
   document.getElementById("steps").innerHTML=ETAPAS.map(([n,t],i)=>`<button class="step" role="tab" aria-selected="${i===state.e}" data-e="${i}"><b>${n}</b><span>${t}</span></button>`).join("");
@@ -586,7 +641,7 @@ function panePrev(k){
     const v=g.m.reduce((s,x)=>s+x.v,0), sem=g.m.filter(x=>!(x.v>0)).length; tot+=v; pend+=sem;
     const val=`<div class="v num">${v>0?brl(v):`<span class="tbd" style="margin:0">A orçar</span>`}<small>${g.m.length>1?`${g.m.length} itens na planilha`:""}</small></div>`;
     if(g.m.length>1){ // grupo com vários itens: clica para abrir a lista
-      const lista=g.m.slice().sort((a,b)=>b.v-a.v).map(x=>`<div class="it ${x.v>0?"":"pend"}"><span>${esc(x.d)}${x.o?`<small>${esc(x.o)}</small>`:""}${x.orc?`<span class="pdfs">${orcLinks([x.orc])}</span>`:""}${tagM(infoM(k,x.cat,x.d))}</span><span class="iv num">${x.v>0?brl(x.v):"sem preço"}</span></div>`).join("");
+      const lista=g.m.slice().sort((a,b)=>b.v-a.v).map(x=>`<div class="it ${x.v>0?"":"pend"}"><span>${esc(x.d)}${seloMud(k,x.cat,x.d)}${x.o?`<small>${esc(x.o)}</small>`:""}${x.orc?`<span class="pdfs">${orcLinks([x.orc])}</span>`:""}${tagM(infoM(k,x.cat,x.d))}</span><span class="iv num">${x.v>0?brl(x.v):"sem preço"}</span></div>`).join("");
       return `<div class="sig" data-a style="--i:${i}"><button class="si" aria-expanded="false"><span class="ix">${i+1}</span><div><div class="t">${esc(g.t)}</div>${g.d?`<div class="d">${esc(g.d)}</div>`:""}</div>${val}<span class="ch">›</span></button><div class="items">${lista}</div></div>`;
     }
     const links=orcLinks(g.m.map(x=>x.orc));
@@ -599,9 +654,9 @@ function panePrev(k){
 /* 04 · Investimento total */
 function paneInv(k){
   const c=cats(k), tot=totalDe(k), mx=c[0][1], all=itensDe(k), pend=all.filter(i=>!(i.v>0)), extra=totalPrel(k);
-  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}</small></span>
+  const rows=c.map((x,i)=>`<div class="cat"><button aria-expanded="false"><span class="cn">${esc(x[0])}<small>${x[2].length} ${x[2].length===1?"item":"itens"} · ${fmt(x[1]/tot*100,1)}%${(n=>n?` · <span class="ok-n">${n} ${n===1?"contratado":"contratados"}</span>`:"")(x[2].filter(i=>assinado(infoM(k,x[0],i[0]))).length)}${(n=>n?` · <span class="mud" style="margin:0">${n} ${n===1?"alterado":"alterados"}</span>`:"")(x[2].filter(i=>seloMud(k,x[0],i[0])).length)}</small></span>
       <span class="tr"><i style="--k:${i};width:${Math.max(.4,x[1]/mx*100)}%"></i></span><span class="cv2 num">${brl(x[1])}</span><span class="ch">›</span></button>
-      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
+      <div class="items">${x[2].slice().sort((a,b)=>b[1]-a[1]).map(it=>`<div class="it ${it[1]>0?"":"pend"}"><span>${esc(it[0])}${seloMud(k,x[0],it[0])}${it[2]?`<small>${esc(it[2])}</small>`:""}${it[3]?`<span class="pdfs">${orcLinks([it[3]])}</span>`:""}${tagM(infoM(k,x[0],it[0]))}</span><span class="iv num">${it[1]>0?brl(it[1]):"sem preço"}</span></div>`).join("")}</div></div>`).join("");
   return head(3,"Clique numa etapa para ver os itens.")+`<div class="inv">
     <div class="kpis"><aside class="big" data-a style="--i:0"><span class="eyebrow">Investimento total da obra</span><span class="v num">${brl(tot)}</span>
       <div class="row"><span>Por m² (${fmt(OBRAS[k].galpao.area,0)} m²)</span><b>${brl(tot/OBRAS[k].galpao.area)}</b></div>

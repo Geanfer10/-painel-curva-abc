@@ -16,23 +16,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Avisos de mudança na planilha (painel)
+        if: github.event_name != 'schedule'
+        run: |
+          pip install -q openpyxl
+          python3 scripts/avisos_planilha.py
       - name: Planilha -> Monday (etapas, itens novos e valores)
         if: github.event_name != 'schedule'
         env:
           MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
         run: |
-          pip install -q openpyxl
+          if [ -z "$MONDAY_API_TOKEN" ]; then echo "Sem MONDAY_API_TOKEN: pulei o Monday."; exit 0; fi
           python3 scripts/planilha_para_monday.py
       - name: Monday -> painel (status e orçamentos)
         env:
           MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
-        run: python3 scripts/monday_sync.py
+        run: |
+          if [ -z "$MONDAY_API_TOKEN" ]; then echo "Sem MONDAY_API_TOKEN: pulei o Monday."; exit 0; fi
+          python3 scripts/monday_sync.py
       - name: Enviar se mudou
         run: |
           git config user.name "robo-monday"
           git config user.email "robo-monday@users.noreply.github.com"
-          git add dados/monday.json
+          for f in dados/monday.json dados/avisos.json dados/planilha_snapshot.json; do [ -f "$f" ] && git add "$f"; done
           if git diff --cached --quiet; then echo "Nada a enviar."; exit 0; fi
-          git commit -m "Atualiza status do Monday"
+          git commit -m "Atualiza Monday e avisos da planilha"
           for i in 1 2 3; do git pull --rebase -q && git push && exit 0; sleep 5; done
           exit 1
