@@ -1,11 +1,14 @@
-"""Busca no Monday o status e os orçamentos dos itens das ampliações e grava dados/monday.json.
+"""Busca no Monday o status e os orçamentos das ampliações e grava dados/monday.json.
+Board: item principal = etapa (coluna "Aplicação" da planilha); subelementos = itens da planilha.
+Regra: o subelemento usa o próprio Status/Orçamento; se estiverem vazios, herda os da etapa.
 Roda no GitHub Actions (workflow monday.yml) com o secret MONDAY_API_TOKEN."""
 import json, os, sys, urllib.request
 from datetime import datetime, timezone, timedelta
 
-BOARD = 18440874858
-COL_STATUS, COL_ETAPA, COL_ARQ, COL_LINK = "color_mm99h475", "text_mm99gkgw", "file_mm99m83g", "link_mm99fbc2"
-GRUPOS = {"group_mm998yjc": "dmp", "group_mm998kea": "dpa"}
+BOARD, SUBBOARD = 18440874858, 18440876188
+P = {"status": "color_mm99h475", "arq": "file_mm99m83g", "link": "link_mm99fbc2"}   # colunas do item principal
+S = {"status": "color_mm999dqe", "arq": "file_mm99ehrn", "link": "link_mm99y4s0"}   # colunas dos subelementos
+GRUPOS = {"group_mm99t87": "dmp", "group_mm99ew8h": "dpa"}
 CONTA = "https://messigean18s-team.monday.com"
 
 def api(q, v=None):
@@ -16,34 +19,43 @@ def api(q, v=None):
     if r.get("errors"): sys.exit("Erro do Monday: %s" % r["errors"])
     return r["data"]
 
-CAMPOS = "items { id name group { id title } column_values(ids: [\"%s\",\"%s\",\"%s\",\"%s\"]) { id text value } }" % (COL_STATUS, COL_ETAPA, COL_ARQ, COL_LINK)
-pg = api("query { boards(ids: %d) { items_page(limit: 500) { cursor %s } } }" % (BOARD, CAMPOS))["boards"][0]["items_page"]
+def cols(ids): return "column_values(ids: [%s]) { id text value }" % ",".join('"%s"' % i for i in ids.values())
+CAMPOS = "items { id name group { id title } %s subitems { id name %s } }" % (cols(P), cols(S))
+pg = api("query { boards(ids: %d) { items_page(limit: 200) { cursor %s } } }" % (BOARD, CAMPOS))["boards"][0]["items_page"]
 itens, cursor = pg["items"], pg["cursor"]
 while cursor:
-    pg = api("query($c: String!) { next_items_page(limit: 500, cursor: $c) { cursor %s } }" % CAMPOS, {"c": cursor})["next_items_page"]
+    pg = api("query($c: String!) { next_items_page(limit: 200, cursor: $c) { cursor %s } }" % CAMPOS, {"c": cursor})["next_items_page"]
     itens += pg["items"]; cursor = pg["cursor"]
 
-saida = []
+def ler(item, C):
+    cv = {c["id"]: c for c in item.get("column_values", [])}
+    def js(cid):
+        try: return json.loads((cv.get(cid) or {}).get("value") or "{}") or {}
+        except Exception: return {}
+    return {"status": ((cv.get(C["status"]) or {}).get("text") or "").strip(),
+            "arquivos": len(js(C["arq"]).get("files", [])), "link": js(C["link"]).get("url", "") or ""}
+
+saida, etapas = [], []
 for it in itens:
     obra = GRUPOS.get(it["group"]["id"]) or ("dmp" if "dmp" in it["group"]["title"].lower() else "dpa")
-    cv = {c["id"]: c for c in it["column_values"]}
-    arqs = 0
-    try: arqs = len((json.loads(cv[COL_ARQ]["value"] or "{}")).get("files", []))
-    except Exception: pass
-    link = ""
-    try: link = (json.loads(cv[COL_LINK]["value"] or "{}")).get("url", "") or ""
-    except Exception: pass
-    saida.append({"obra": obra, "nome": it["name"], "etapa": cv[COL_ETAPA]["text"] or "",
-                  "status": cv[COL_STATUS]["text"] or "", "arquivos": arqs, "link": link,
-                  "url": f"{CONTA}/boards/{BOARD}/pulses/{it['id']}"})
-saida.sort(key=lambda x: (x["obra"], x["etapa"], x["nome"]))
-novo = {"board": f"{CONTA}/boards/{BOARD}", "itens": saida}
+    pai, url_pai = ler(it, P), f"{CONTA}/boards/{BOARD}/pulses/{it['id']}"
+    etapas.append({"obra": obra, "etapa": it["name"], "status": pai["status"] or "A negociar",
+                   "arquivos": pai["arquivos"], "link": pai["link"], "url": url_pai})
+    for sub in it.get("subitems") or []:
+        f = ler(sub, S); proprio = f["arquivos"] > 0 or f["link"]
+        saida.append({"obra": obra, "etapa": it["name"], "nome": sub["name"],
+                      "status": f["status"] or pai["status"] or "A negociar",
+                      "arquivos": f["arquivos"] if proprio else pai["arquivos"],
+                      "link": f["link"] if proprio else pai["link"],
+                      "url": f"{CONTA}/boards/{SUBBOARD}/pulses/{sub['id']}" if proprio else url_pai})
+saida.sort(key=lambda x: (x["obra"], x["etapa"], x["nome"])); etapas.sort(key=lambda x: (x["obra"], x["etapa"]))
+novo = {"board": f"{CONTA}/boards/{BOARD}", "etapas": etapas, "itens": saida}
 caminho = "dados/monday.json"
 try:
     antigo = json.load(open(caminho, encoding="utf-8"))
-    if antigo.get("itens") == saida and antigo.get("board") == novo["board"]:
+    if all(antigo.get(k) == novo[k] for k in ("board", "etapas", "itens")):
         print("Sem mudanças no Monday."); sys.exit(0)
 except FileNotFoundError: pass
 novo["atualizado"] = datetime.now(timezone(timedelta(hours=-3))).strftime("%d/%m/%Y %H:%M")
 json.dump(novo, open(caminho, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(f"Gravado {caminho}: {len(saida)} itens.")
+print(f"Gravado {caminho}: {len(etapas)} etapas, {len(saida)} itens.")

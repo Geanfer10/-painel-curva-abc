@@ -1,5 +1,247 @@
 {
  "board": "https://messigean18s-team.monday.com/boards/18440874858",
+ "etapas": [
+  {
+   "obra": "dmp",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Estrutura Metálica",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Iluminação Galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Piso",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Terraplanagem",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dmp",
+   "etapa": "Topografia",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Armazenamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Combate ao Incêndio",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Docas de Carregamento",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Drenagem Pluvial",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Fechamento Frontal",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Fechamento Lateral",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Fundação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Iluminação galpão",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Pintura",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Piso Galpão DPA IV",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Piso Pátio de Manobra",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Pré Moldado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Sala Coordenação",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Serviço Preliminar",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Telhado",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  },
+  {
+   "obra": "dpa",
+   "etapa": "Terraplanagem",
+   "status": "A negociar",
+   "arquivos": 0,
+   "link": "",
+   "url": ""
+  }
+ ],
  "itens": [
   {
    "obra": "dmp",
@@ -1370,5 +1612,5 @@
    "url": ""
   }
  ],
- "atualizado": "20/11/2026 10:30"
+ "atualizado": "20/11/2026 11:10"
 }
